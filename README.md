@@ -27,12 +27,12 @@ version 0.0.1
  * doc ドキュメントディレクトリ
  * sample サンプルディレクトリ
  * README.md 本ファイル
+ * NEWS.txt 更新履歴
  * jquery.m4w.js M4W本体
  * jquery.m4w.sound.js M4Wを使用し、音声を扱うための拡張プラグイン
  * jquery.m4w.video.js M4Wを使用し、ビデオを再生するための拡張プラグイン
  * jquery.m4w.thread.js M4Wを使用し、スレッドを扱うための拡張プラグイン
  * jquery.m4w.sprite_ex.js M4Wを使用し、強力なスプライトを扱うための拡張プラグイン
- * 
 
 # 最低限の前準備(よくある方法)：
  1. HTMLファイルを作成する

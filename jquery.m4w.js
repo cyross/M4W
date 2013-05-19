@@ -174,29 +174,23 @@
    * @param [options.content_width] 描画領域の横幅<br>単位はピクセル<br>指定したときは、widthで指定した範囲まで拡大して表示される<br>省略時はwidthと同じ値
    * @param [options.content_height] 描画領域の高さ<br>単位はピクセル<br>指定したときは、heightで指定したはんいまで拡大して表示される<br>省略時はheightと同じ値
    * @param [options.renderer] 描画する際の処理関数<br>省略時はRenderer.default_render
+   * @param [options.z] ブラウザ上の前後位置を指定する<br>省略時は0
    */
   Screen = function(options){
     var o = $.extend({
       width: 640,
       height: 480,
-      content_width: 640,
-      content_height: 480,
       position: "relative",
       left: 0,
       top: 0,
       renderer: ScreenRenderer.default_render,
       body: $("body"),
-      events: {}
+      events: {},
+      z: 0
     }, options);
+    var $layer = window.m4w.create_canvas_tag(o);
 
-    var $layer = $('<canvas />', {width: o.width, height: o.height});
-    $layer.attr("id", o.id);
-    $layer.css("position", o.position);
-    $layer.css("left", o.left);
-    $layer.css("top", o.top);
     $layer.appendTo(o.body);
-    $layer[0].width = o.content_width;
-    $layer[0].height = o.content_height;
 
     this.body = o.body;
     /**
@@ -344,28 +338,6 @@
   };
 
   /**
-   * @constructor
-   * @class スプライトと同じタイミングで図形描画を管理・操作(ドローワー)
-   * @param options.id スプライトに一意に一位につけられるID<br>省略時はvalue属性(Imageオブジェクト)のidプロパティ
-   * @param [options.func] ブラウザ画面関数配列<br>関数の引数には対象ブロックのコンテキスト(context)が渡る<br>省略時は空の関数
-   */
-  Drawer = function(options){
-    var o = $.extend({
-      func: function(ctx){ }
-    }, options);
-    // 直接インスタンスオブジェクトにパラメータの内容を結合
-    $.extend(this, o);
-  }
-
-  /**
-   * 画面の図形の描画を行う
-   */
-  Drawer.prototype.render = function(ctx){
- 	  this.func.render(ctx);
-  	return this;
-  };
-
-  /**
    * 描画開始関数を取得(内部で使用)<br>
    * Thanks Kudox.jp(http://kudox.jp/html-css/html5-canvas-animation)<br>
    */
@@ -444,7 +416,6 @@
    * <li>Screen</li>
    * <li>AssetsLoader</li>
    * <li>Sprite</li>
-   * <li>Drawer</li>
    * <li>SpriteRenderer</li>
    * <li>ScreenRenderer</li>
    * </ul>
@@ -463,7 +434,6 @@
     Screen: Screen,
     AssetsLoader: AssetsLoader,
     Sprite: Sprite,
-    Drawer: Drawer,
     SpriteRenderer: SpriteRenderer,
     ScreenRenderer: ScreenRenderer,
     is_supported: function(){
@@ -548,6 +518,44 @@
   window.m4w.stop_main_loop = function(){
     this.is_stop = true;
   }.bind(window.m4w);
+
+  /**
+   * Canvasタグを作成する
+   * @param options.id 画面のID
+   * @param [options.width] 画面の横幅<br>ピクセル単位<br>省略時は640
+   * @param [options.height] 画面の高さ<br>ピクセル単位<br>省略時は480
+   * @param [options.position] bodyからの位置関係(CSSのpositionと同じ)<br>省略時は"relative"
+   * @param [options.left] ブラウザ(もしくは親ブロックからの右方向の位置<br>単位はピクセル<br>省略時は0(ブロックの左端)
+   * @param [options.top] ブラウザ(もしくは親ブロックからの上方向の位置<br>単位はピクセル<br>省略時は0(ブロックの上端)
+   * @param [options.content_width] 描画領域の横幅<br>単位はピクセル<br>指定したときは、widthで指定した範囲まで拡大して表示される<br>省略時はwidthと同じ値
+   * @param [options.content_height] 描画領域の高さ<br>単位はピクセル<br>指定したときは、heightで指定したはんいまで拡大して表示される<br>省略時はheightと同じ値
+   * @param [options.z] ブラウザ上の前後位置を指定する<br>省略時は0
+   */
+  window.m4w.create_canvas = function(options){
+    var o = $.extend({
+      width: 640,
+      height: 480,
+      content_width: 640,
+      content_height: 480,
+      position: "relative",
+      left: 0,
+      top: 0,
+      z: 0
+    }, options);
+    var $canvas = $('<canvas />', {width: o.width, height: o.height});
+    var cw = o.width;
+    var ch = o.height;
+    if("content_width" in o){ cw = o.content_width; }
+    if("content_height" in o){ ch = o.content_height; }
+    $canvas.attr("id", o.id);
+    $canvas.css("position", o.position);
+    $canvas.css("left", o.left);
+    $canvas.css("top", o.top);
+    $canvas.css("z-index", o.z);
+    $canvas[0].width = cw;
+    $canvas[0].height = h;
+    return $canvas;
+  }
 
   /**
    * jQueryオブジェクトの別名(http://jquery.com/)
