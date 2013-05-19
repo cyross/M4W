@@ -47,7 +47,8 @@ version 0.0.1
 
 実際の例は以下
 
- * index.html
+[index.html]
+
     <DOCTYPE HTML>
     <html>
       <head>
@@ -68,7 +69,9 @@ version 0.0.1
         <div id="button1"></div>
       </body>
     </html>
- * main.css
+
+[main.css]
+
     div#game {
       background: #008000;
       position: absolute;
@@ -86,7 +89,9 @@ version 0.0.1
       top: 128px;
       left: 0;
     }
- * main.js
+
+[main.js]
+
     $(document).ready(function(){
       // メインロジック
       var main_logic = function(){
