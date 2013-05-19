@@ -1,6 +1,6 @@
 /**
  * @fileOverview Miyako4Web(Miyako for Web a.k.a M4W/m4w) Drawer Extension<br>
- * M4W用図形簿ゆが対応拡張プラグイン
+ * M4W用図形描画応拡張プラグイン
  * このファイルを読み込むと、window.m4wオブジェクトに以下のプロパティが追加される<br>
  * window.m4w.Drawer<br>
  *

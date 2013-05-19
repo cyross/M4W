@@ -155,7 +155,7 @@
    */
   SpriteRenderer.default_render = function(context){
     context.globalAlpha = this.a;
-    context.drawImage(this.image, 0, 0);
+    context.drawImage(this.image, this.x, this.y);
   };
 
   /**
@@ -188,7 +188,7 @@
       events: {},
       z: 0
     }, options);
-    var $layer = window.m4w.create_canvas_tag(o);
+    var $layer = window.m4w.create_canvas(o);
 
     $layer.appendTo(o.body);
 
@@ -390,10 +390,6 @@
       throw new Error("Screen object is already registered in window.m4w!");
     }
     window.m4w.screen = this.screen;
-    /**
-     * @property データ共有オブジェクト<br>初期は空のオブジェクト
-     */
-    this.vars = {};
   };
 
   /**
@@ -426,7 +422,9 @@
    * </ul>
    * また、以下のプロパティが利用可能
    * <ul>
-   * <li>interval(画面の描画間隔、初期値は60(60fps相当)、ただし、間隔取得にsetTimeoutを使用するときのみ</li>
+   * <li>interval(画面の描画間隔、初期値は60(60fps相当)、ただし、間隔取得にsetTimeoutを使用するときのみ)</li>
+   * <li>vars(データ共有オブジェクト　初期は空のオブジェクト)</li>
+   * <li>input_vars(入力デバイス関連情報共有オブジェクト<br>初期は空のオブジェクト)</li>
    * </ul>
    * @example var dw = new (window).m4w.Drawer({render: function(ctx){ ctx.beginPath(); ... }});
   */
@@ -485,6 +483,14 @@
      * @property ゲームロジック
      */
     main_logic: function(){ },
+    /**
+     * @property データ共有オブジェクト<br>初期は空のオブジェクト
+     */
+    vars: {},
+    /**
+     * @property 入力デバイス関連情報共有オブジェクト<br>初期は空のオブジェクト
+     */
+    input_vars: {}
   };
 
   /**
@@ -553,7 +559,7 @@
     $canvas.css("top", o.top);
     $canvas.css("z-index", o.z);
     $canvas[0].width = cw;
-    $canvas[0].height = h;
+    $canvas[0].height = ch;
     return $canvas;
   }
 

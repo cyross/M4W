@@ -66,3 +66,6 @@
 ・window.m4w.create_canvasメソッドを追加
 ・Screenコンストラクタにzパラメータを復活
 ・サンプル0001がIE10で正しく表示されない問題を修正
+・M4W.varsをwindow.m4w.varsに移動
+・window.m4w.input_varsを追加
+・サンプル0002を追加

@@ -57,7 +57,7 @@
     context.setTransform(this.m11,this.m12,this.m21,this.m22,this.x-this.dx,this.y-this.dy);
     context.translate(this.dx,this.dy);
     context.globalAlpha = this.a;
-    context.drawImage(this.image, this.sx, this.sy, this.sw, this.sh, 0, 0, this.dw, this.dh);
+    context.drawImage(this.image, this.sx, this.sy, this.sw, this.sh, this.x, this.y, this.dw, this.dh);
     context.restore();
   };
 
@@ -70,7 +70,7 @@
    * </ul>
    */
   SpriteExRenderer.fast_render = function(context){
-    context.drawImage(this.image, 0, 0);
+    context.drawImage(this.image, this.x, this.y);
   };
 
   /**
@@ -84,7 +84,7 @@
    */
   SpriteExRenderer.fast_render2 = function(context){
     context.globalAlpha = this.a;
-    context.drawImage(this.image, this.sx, this.sy, this.sw, this.sh, 0, 0, this.dw, this.dh);
+    context.drawImage(this.image, this.sx, this.sy, this.sw, this.sh, this.x, this.y, this.dw, this.dh);
   };
 
   /**
