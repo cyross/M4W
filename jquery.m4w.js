@@ -1,0 +1,585 @@
+/**
+ * @fileOverview Miyako4Web(Miyako for Web a.k.a M4W/m4w)本体<br>
+ * Thanks Kudox.jp(http://kudox.jp/html-css/html5-canvas-animation)<br>
+ * 
+ * @name Miyako for Web(M4W)
+ * @author Cyross Makoto (サイロス誠)
+ * @version 0.0.1
+ * @revision 1
+ * @require jQuery 1.9.0/2.0.0(or later)
+ * @license MIT License (MITライセンス)
+ */
+
+(function($){
+
+  /**
+   * @constructor
+   * @class アセット(画像、スプライト、音声など)をブラウザに読み込む
+   */
+  AssetsLoader = function(){
+  };
+
+  /** @ignore */
+  AssetsLoader.loaders = {
+    /** @ignore */
+    image: function(options){ return Sprite.load_image(options); },
+    /** @ignore */
+    sprite: function(options){ return Sprite.load(options); }
+  };
+
+  /**
+   * 画像などのアセットを読み込み、指定した関数をコールバックする<br>
+   * すべてのロードに成功したときはsuccess関数、一つでも失敗したときはfailed関数を呼ぶ
+   * success関数の引数は以下のキーを持つ辞書オブジェクト<br>
+   * <table>
+   * <tr><th>Key</th><th>Value</th></tr>
+   * <tr><td>image</td><td>Imageオブジェクトの辞書オブジェクト</tr>
+   * <tr><td>sprite</td><td>Spriteオブジェクトの辞書オブジェクト</tr>
+   * </table>
+   * failed関数の引数はdefer.when.failedメソッドの引数の配列が渡される<br>
+   * @example 実際のImage/Sprite/Soundを取得するときは以下の方法でアクセス可能<br>
+   * 例1)<br>
+   * function success(assets){<br>
+   *    var image = assets.image.(id);<br>
+   *    var sprite = assets.sprite.(id);<br>
+   * }<br>
+   * 例2)<br>
+   * function success(assets){<br>
+   *    var image = assets["image"]["id"];<br>
+   *    var sprite = assets["sprite"]["id"];<br>
+   * }
+   * @param options.assets アセット設定オブジェクトの配列
+   * @param options.assets[].type アセットの形式<br>画像は"image"、スプライトは"sprite"と指定する
+   * @param options.assets[].その他 Image,Spriteクラスコンストラクタの引数と同じものを指定
+   * @param [options.success] ロードが全て完了したときに呼び出されるコールバック関数<br>引数はアセット管理オブジェクト<br>内容は後述
+   * @param [options.failed] ロードに失敗した時に呼び出されるコールバック関数<br>引数は失敗した時に渡される引数リスト
+   */
+  AssetsLoader.load = function(options){
+    var o = $.extend({
+      success: function(assets){ return assets; },
+      failed: function(args){ alert("error occured!"); return args; }
+    }, options);
+
+    var assets = {}
+
+    for(var i=0; i<o.assets.length; i++){
+      var asset = o.assets[i]
+      assets[asset.id] = asset;
+    }
+
+    var exec_assets = [];
+    for(var asset_id in assets){
+      var asset = assets[asset_id];
+      exec_assets.push((AssetsLoader.loaders[asset.type])(asset));
+    }
+    $.when.apply(this, exec_assets).then(function(){
+      var loaded_assets = {
+      };
+      for(var i=0; i<arguments.length; i++){
+        var asset = arguments[i];
+        if (!(asset.type in loaded_assets)){ loaded_assets[asset.type] = {}; }
+        loaded_assets[asset.type][asset.id] = asset.value;
+      }
+      o.success(loaded_assets);
+    }).fail(function(){
+      o.failed(arguments);
+    });
+  };
+
+  /**
+   * @constructor
+   * @class 画面用レンダリングメソッドを定義
+   */
+  ScreenRenderer = function(){
+    this.name= "Miyako4Web Renderer";
+  };
+
+  /**
+   * 画面への描画を行う<br>
+   * 次の順番で描画する
+   * <ul>
+   * <li>画面の内容を消去する</li>
+   * <li>各スプライトを描画する</li>
+   */
+  ScreenRenderer.default_render = function(){
+    var ctx = this.context;
+    var ia = this.sprites;
+    ctx.clearRect(0, 0, this.width, this.height);
+    for(var i=0; i<ia.length; i++){
+      var s = ia[i];
+      if(!('render' in s)){ continue; }
+      s.render(ctx);
+    }
+    return this;
+  };
+
+  /**
+   * 画面の消去を行わない画面への描画を行う<br>
+   * 次の順番で描画する
+   * <ul>
+   * <li>各スプライトを描画する</li>
+   */
+  ScreenRenderer.no_clear_render = function(){
+    var ctx = this.context;
+    var ia = this.sprites;
+    for(var i=0; i<ia.length; i++){
+      var s = ia[i];
+      if(!('render' in s)){ continue; }
+      s.render(ctx);
+    }
+    return this;
+  };
+
+  /**
+   * 画面の描画を行わない
+   */
+  ScreenRenderer.no_render = function(){
+  	return this;
+  };
+
+  /**
+   * @constructor
+   * @class スプライト用レンダリングメソッドを定義
+   */
+  SpriteRenderer = function(){
+    this.name= "Miyako4Web Renderer";
+  };
+
+  /**
+   * 画面への描画を行う<br>
+   * 隠蔽中の時は描画しない<br>
+   * 次の順番で描画する
+   * <ul>
+   * <li>画像を描画する(image)</li>
+   * </ul>
+   */
+  SpriteRenderer.default_render = function(context){
+    context.globalAlpha = this.a;
+    context.drawImage(this.image, 0, 0);
+  };
+
+  /**
+   * @constructor
+   * @class 画面(ブロック要素領域)・画面上で発生するイベントを管理<br>スプライトの描画制限は、sprites配列の要素のインデックスをマイナスにするか、数値以外の文字列にする
+   * @param options.id 画面のID
+   * @param [options.width] 画面の横幅<br>ピクセル単位<br>省略時は640
+   * @param [options.height] 画面の高さ<br>ピクセル単位<br>省略時は480
+   * @param [options.position] bodyからの位置関係(CSSのpositionと同じ)<br>省略時は"relative"
+   * @param [options.left] ブラウザ(もしくは親ブロックからの右方向の位置<br>単位はピクセル<br>省略時は0(ブロックの左端)
+   * @param [options.top] ブラウザ(もしくは親ブロックからの上方向の位置<br>単位はピクセル<br>省略時は0(ブロックの上端)
+   * @param [options.body] 画面レイヤーを埋め込むブロック<br>jQueryオブジェクトを指定<br>省略時はbodyブロック($("body"))
+   * @param [options.css] CSS値をオブジェクトで指定<br>省略時は{}
+   * @param [options.attr] attr値をオブジェクトで指定<br>jQueryオブジェクトを指定<br>省略時は{}
+   * @param [options.events] 登録したいイベントの関数群<br>"イベント名": イベントハンドラ本体で登録する<br>省略時は{}
+   * @param [options.content_width] 描画領域の横幅<br>単位はピクセル<br>指定したときは、widthで指定した範囲まで拡大して表示される<br>省略時はwidthと同じ値
+   * @param [options.content_height] 描画領域の高さ<br>単位はピクセル<br>指定したときは、heightで指定したはんいまで拡大して表示される<br>省略時はheightと同じ値
+   * @param [options.renderer] 描画する際の処理関数<br>省略時はRenderer.default_render
+   */
+  Screen = function(options){
+    var o = $.extend({
+      width: 640,
+      height: 480,
+      content_width: 640,
+      content_height: 480,
+      position: "relative",
+      left: 0,
+      top: 0,
+      renderer: ScreenRenderer.default_render,
+      body: $("body"),
+      events: {}
+    }, options);
+
+    var $layer = $('<canvas />', {width: o.width, height: o.height});
+    $layer.attr("id", o.id);
+    $layer.css("position", o.position);
+    $layer.css("left", o.left);
+    $layer.css("top", o.top);
+    $layer.appendTo(o.body);
+    $layer[0].width = o.content_width;
+    $layer[0].height = o.content_height;
+
+    this.body = o.body;
+    /**
+     * @property 画面幅
+     */
+    this.width = o.width;
+    /**
+     * @property 画面高さ
+     */
+    this.height = o.height;
+    /**
+     * @property 描画領域幅
+     */
+    this.content_width = o.content_width;
+    /**
+     * @property 描画領域高さ
+     */
+    this.content_height = o.content_height;
+    /**
+     * @property 画面レイヤ
+     */
+    this.layer = $layer;
+    /**
+     * @property 画面ID
+     */
+    this.id = o.id;
+    /**
+     * @property 画面のデバイスコンテキスト
+     */
+    this.context = this.layer[0].getContext("2d");
+    /**
+     * @property スプライト配列
+     */
+    this.sprites = [];
+    /**
+     * @property 画面レンダラ
+     */
+    this.render = o.renderer.bind(this);
+    
+    for(name in o.css){ $layer.css(name, o.css[name]); }
+    for(name in o.attr){ $layer.attr(name, o.attr[name]); }
+    for(name in o.events){
+      $screen.unbind(name);
+      $screen.bind(name, o.events[name]);
+    }
+  };
+
+  /** 画面の内容を消去する */
+  Screen.prototype.clear = function(){
+    this.context.clearRect(0, 0, this.width(), this.height());
+  };
+
+  /** 画面の横幅・高さを変更する
+   * @param {int} width 横幅
+   * @param {int} height 高さ
+   */
+  Screen.prototype.resize = function(width, height){
+    var w = parseInt(width);
+    var h = parseInt(height);
+    this.layer.css("width", w);
+    this.layer.css("height", h);
+    this.layer[0].width = w;
+    this.layer[0].height = h;
+  };
+
+  /** 画面の位置を変更する
+   * @param {int} left 右方向の位置
+   * @param {int} top 下方向の位置
+   */
+  Screen.prototype.move = function(left, top){
+    this.body.css("left", left);
+    this.body.css("top", top);
+  };
+
+  /**
+   * @constructor
+   * @class スプライトを管理・操作
+   * @param options.id スプライトに一意に一位につけられるID<br>省略時はvalue属性(Imageオブジェクト)のidプロパティ
+   * @param options.value スプライトの元にするImageクラス(Javascript標準クラス)のオブジェクト
+   * @param [options.x] ブロックの左端から右方向の位置(左端を0とする)<br>省略時は0
+   * @param [options.y] ブロックの左端から右方向の位置(左端を0とする)<br>省略時は0
+   * @param [options.a] 描画時の透明度<br>0.0≦a≦1.0の間<br>0.0で完全透明、1.0で完全不透明<br>省略時は1.0
+   */
+  Sprite = function(options){
+    var o = $.extend({
+      id: options.value.id,
+      x:0, y:0, a:1.0
+    }, options);
+    this.id = o.id;
+    this.image = o.value;
+    /** @property ブロックの左端から右方向の位置(左端を0とする) */
+    this.x = o.x;
+    /** @property ブロックの左端から右方向の位置(左端を0とする) */
+    this.y = o.y;
+    /** @property 描画時の透明度<br>0≦a≦1の間<br>0で完全透明、1で完全不透明 */
+    this.a = o.a;
+  };
+
+  /**
+   * 画像ファイルを読み込む<br>imgタグを作り、再生ができるときに指定した関数を呼び出す
+   * @param options.id 画像に一意につけられるID
+   * @param options.src 対象ファイルのURLを配列で指定(マルチブラウザ対応)
+   * @return 画像を読み込んでいるDeferredオブジェクト<br>コールバック関数の引数は、{type: "image", id: options.id, value: 生成したImageオブジェクト}で示すオブジェクト
+   */
+  Sprite.load_image = function(options){
+    var defer = $.Deferred();
+    var img_id = options.id;
+    var img = new Image();
+    img.src = options.src+ "?" + new Date().getTime();
+    img.onload = function(){ defer.resolve({type: "image", id: img_id, value: img}); };
+    return defer.promise();
+  };
+
+  /**
+   * 音声ファイルを読み込む<br>audioタグを作り、再生ができるときに指定した関数を呼び出す
+   * @param options.id スプライトに一意に一位につけられるID<br>内部で生成するImageオブジェクトも同じIDになる
+   * @param options.src 対象ファイルのURLを配列で指定(マルチブラウザ対応)
+   * @return スプライトを生成しているDeferredオブジェクト<br>コールバック関数の引数は、{type: "sprite", id: options.id, value: 生成したImageオブジェクト}で示すオブジェクト
+   */
+  Sprite.load = function(options){
+    var defer = $.Deferred();
+    Sprite.load_image(options).then(function(obj){
+      defer.resolve({type: "sprite", id: obj.id, value: new Sprite(obj)});
+    });
+    return defer.promise();
+  };
+
+  /**
+   * スプライトを描画する<br>省略時はRenderer.default_render関数が指定される
+   * @param {Object} context 対象のレイヤー(canvasタグ)が持つコンテキスト
+   */
+  Sprite.prototype.render = SpriteRenderer.default_render;
+
+  /**
+   * スプライトを移動させる<br>座標は、ブロックの左上が(0,0)で、値がプラスだと右・下方向、マイナスだと左・上方向となる
+   * @param [options.x] 左端を0とした時の右方向の位置<br>省略時は現在位置
+   * @param [options.y] 上端を0とした時の下方向の位置<br>省略時は現在位置
+   * @param [options.dx] 右方向をプラスとした時の移動量<br>省略時は0
+   * @param [options.dy] 下方向をプラスとした時の移動量<br>省略時は0
+   */
+  Sprite.prototype.move = function(options){
+    var o = $.extend({x: this.x, y: this.y, dx: 0, dy: 0}, options);
+    this.x = o.x + o.dx;
+    this.y = o.y + o.dy;
+  };
+
+  /**
+   * @constructor
+   * @class スプライトと同じタイミングで図形描画を管理・操作(ドローワー)
+   * @param options.id スプライトに一意に一位につけられるID<br>省略時はvalue属性(Imageオブジェクト)のidプロパティ
+   * @param [options.func] ブラウザ画面関数配列<br>関数の引数には対象ブロックのコンテキスト(context)が渡る<br>省略時は空の関数
+   */
+  Drawer = function(options){
+    var o = $.extend({
+      func: function(ctx){ }
+    }, options);
+    // 直接インスタンスオブジェクトにパラメータの内容を結合
+    $.extend(this, o);
+  }
+
+  /**
+   * 画面の図形の描画を行う
+   */
+  Drawer.prototype.render = function(ctx){
+ 	  this.func.render(ctx);
+  	return this;
+  };
+
+  /**
+   * 描画開始関数を取得(内部で使用)<br>
+   * Thanks Kudox.jp(http://kudox.jp/html-css/html5-canvas-animation)<br>
+   */
+  window.requestAnimFrame = (function(){
+    return window.requestAnimationFrame       ||
+           window.webkitRequestAnimationFrame ||
+           window.mozRequestAnimationFrame    ||
+           window.oRequestAnimationFrame      ||
+           window.msRequestAnimationFrame     ||
+           function(/* function */ callback){ return window.setTimeout(callback, 1000/window.m4w.interval); };
+  }());
+  
+  /**
+   * 描画停止関数を取得(内部で使用)<br>
+   * Thanks Kudox.jp(http://kudox.jp/html-css/html5-canvas-animation)<br>
+   */
+  window.cancelAnimFrame = (function() {
+    return window.cancelAnimationFrame ||
+           window.cancelRequestAnimationFrame ||
+           window.webkitCancelAnimationFrame ||
+           window.webkitCancelRequestAnimationFrame ||
+           window.mozCancelAnimationFrame ||
+           window.mozCancelRequestAnimationFrame ||
+           window.msCancelAnimationFrame ||
+           window.msCancelRequestAnimationFrame ||
+           window.oCancelAnimationFrame ||
+           window.oCancelRequestAnimationFrame ||
+           function(id) { window.clearTimeout(id); };
+  }());
+
+  /**
+   * @param options.body 処理対象のjQueryオブジェクト
+   * @constructor
+   * @class $.fn.m4w呼び出し後の各種処理をまとめる
+  */
+  M4W = function(options){
+    this.body = options.body;
+    // screen_optionsに"body"がないときは、this.bodyを追加
+    if(!("screen_options" in options)){
+      options["screen_options"] = {body: this.body};
+    }
+    else if(!("body" in options.screen_options)){
+      options.screen_options["body"] = this.body;
+    }
+    /**
+     * @property スクリーン共有オブジェクト<br>Screenクラス
+     */
+    this.screen = new Screen(options.screen_options);
+    if(!(typeof window.m4w.screen === 'undefined')){
+      throw new Error("Screen object is already registered in window.m4w!");
+    }
+    window.m4w.screen = this.screen;
+    /**
+     * @property データ共有オブジェクト<br>初期は空のオブジェクト
+     */
+    this.vars = {};
+  };
+
+  /**
+   * 対象のDOMオブジェクトにアセットを追加する
+   * @param {Object} options AssetsLoader.loadメソッドの引数と同じ
+   */
+  M4W.prototype.add_assets = function(options){
+    AssetsLoader.load(options);
+    return this.body;
+  };
+  
+  /**
+   * windowオブジェクト
+   * @name window
+  */
+  
+  /**
+   * @namespace 各種クラスの外部アクセス用名前空間<br>以下のクラスが利用可能
+   * <ul>
+   * <li>Screen</li>
+   * <li>AssetsLoader</li>
+   * <li>Sprite</li>
+   * <li>Drawer</li>
+   * <li>SpriteRenderer</li>
+   * <li>ScreenRenderer</li>
+   * </ul>
+   * また、以下の関数が利用可能
+   * <ul>
+   * <li>is_supported</li>
+   * <li>is_smart_phone</li>
+   * </ul>
+   * また、以下のプロパティが利用可能
+   * <ul>
+   * <li>interval(画面の描画間隔、初期値は60(60fps相当)、ただし、間隔取得にsetTimeoutを使用するときのみ</li>
+   * </ul>
+   * @example var dw = new (window).m4w.Drawer({render: function(ctx){ ctx.beginPath(); ... }});
+  */
+  window.m4w = {
+    Screen: Screen,
+    AssetsLoader: AssetsLoader,
+    Sprite: Sprite,
+    Drawer: Drawer,
+    SpriteRenderer: SpriteRenderer,
+    ScreenRenderer: ScreenRenderer,
+    is_supported: function(){
+      // 対応ブラウザは、今のところIE9以降のみ
+      var user_agent = window.navigator.userAgent.toLowerCase();
+      var version = window.navigator.appVersion.toLowerCase();
+      if(user_agent.indexOf("msie") > -1){
+        // IE6 -> false
+        if(version.indexOf("msie 6") > -1){ return false; }
+        // IE7 -> false
+        if(version.indexOf("msie 7") > -1){ return false; }
+        // IE8 -> false
+        if(version.indexOf("msie 8") > -1){ return false; }
+        // IE9以降 -> true
+      }
+      return true;
+    },
+    is_smart_phone: function(){
+      var user_agent = window.navigator.userAgent.toLowerCase();
+      var version = window.navigator.appVersion.toLowerCase();
+      // iPhone
+      if(user_agent.indexOf("iphone") > -1){ return true; }
+      // iPad
+      if(user_agent.indexOf("ipad") > -1){ return true; }
+      // iPod(touch)
+      if(user_agent.indexOf("ipod") > -1){ return true; }
+      // android端末
+      if(user_agent.indexOf("android") > -1){ return true; }
+      // blackberry
+      if(user_agent.indexOf("blackberry") > -1){ return true; }
+      // WindowsPhone端末
+      if(user_agent.indexOf("windowsphone") > -1){ return true; }
+      // その他
+      return false;
+    },
+    /**
+     * @property 画面更新間隔(初期値:60(fps))
+     */
+    interval: 60,
+    /**
+     * @property 画面更新ID(内部で使用)
+     */
+    rendering_id: null,
+    /**
+     * @property 画面更新終了フラグ(内部で使用)
+     */
+    is_stop: false,
+    /**
+     * @property ゲームロジック
+     */
+    main_logic: function(){ },
+  };
+
+  /**
+   * ゲームループ内部ロジック
+   */
+  window.m4w._game_loop = function(){
+    // メインロジック実行
+    this.main_logic();
+    // 外部から停止リクエストが来たときは終了
+    if(this.is_stop){
+      window.cancelAnimFrame(this.rendering_id);
+      this.is_stop = false;
+      return;
+    }
+    // 画面描画
+    this.screen.render();
+    // 次のループ実行を設定
+    this.rendering_id = window.requestAnimFrame(this._game_loop.bind(this));
+  }.bind(window.m4w);
+
+  /**
+   * ゲームループ開始
+   */
+  window.m4w.main_loop = function(){
+    this.rendering_id = window.requestAnimFrame(this._game_loop.bind(this));
+  }.bind(window.m4w);
+
+  /**
+   * ゲームループを停止する
+   */
+  window.m4w.stop_main_loop = function(){
+    this.is_stop = true;
+  }.bind(window.m4w);
+
+  /**
+   * jQueryオブジェクトの別名(http://jquery.com/)
+   * @name $
+   * @class 
+   */
+  
+  /**
+   * jQueryオブジェクトのプラグイン関数(http://jquery.com/)
+   * @name $.fn
+   * @class 
+   */
+
+   /**
+   * 指定したブロックのm4w初期化
+   * このメソッドを呼び出すと、以下の場所にオブジェクトが追加される
+   * <table>
+   * <tr><th>対象</th><th>名称</th><th>オブジェクト</th></tr>
+   * <tr><td>jQueryオブジェクト</td><td>m4w</td><td>M4W</td></tr>
+   * <tr><td>各ブロック要素のDOMオブジェクト</td><td>m4w</td><td>M4WDOM</td></tr>
+   * </table>
+   * @param [options.screen_options] screenオブジェクトに渡す引数<br>Screenコンストラクタの引数と同じ
+   * @param [options.assets] 初期化時に作成したいアセットの配列。内容はAssetLoader.loadメソッドの引数と同じ<br>省略時はnull
+   */
+  $.fn.m4w = function(options){
+    var o = $.extend({
+      screen_options: {},
+      assets: null,
+      body: $(this)
+    }, options);
+   
+    $.extend($(this).m4w, new M4W(o));
+    if(o.assets != null){ $(this).m4w.add_assets(o.assets); }
+  };
+})(jQuery);

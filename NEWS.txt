@@ -1,0 +1,57 @@
+更新履歴
+
+2012/04/20
+・初回アップデート
+
+2012/04/29
+・一部バグ修正
+・formに関数追加
+・サンプルゲーム「ライフゲーム」追加
+・サンプルゲーム「ライフゲームv2」追加
+
+2012/04/30
+・一部バグ修正
+・formに関数追加
+・サンプルゲーム「ライフゲームv3」追加
+
+2012/05/01
+・form系関数の一部リファクタリング
+・form系関数のオプションにclasses(HTMLブロックのclass属性)を追加
+・ブラウザがサポートされているかの判別関数を追加(window.m4w.is_support)
+・スマートフォンからの接続かどうかの判別関数を追加(window.m4w.is_smart_phone)
+
+2013/05/18
+・大幅な仕様変更
+　・jquery.m4w.form.jsの削除
+　・Layer,Background,M4WDOMクラスの削除
+　・ThredsクラスをThreadManagerクラスに変更
+　・RendererクラスをScreenRender,SpriteRenderクラスに分割
+　・$(...).m4w系関数の対象を「全ブロック」から、「最初のブロック」に集約
+　・スレッド管理の簡略化(IDによる管理から配列による管理に)
+　・スプライト管理の簡略化(IDによる管理から配列による管理に)
+　・prerender、postrenderの削除(全てspritesで管理)
+　　・配列の要素のオブジェクトにrender(ctx)メソッドを追加することで対処
+　・処理の簡略化
+　・Sprite、Drawerからv属性を削除
+　　・表示・非表示を選択するときは、Screen.spritesのインデックスを負数にするか、文字列にして下さい
+　・既存のSpriteクラスをSpriteExクラスに変更
+　　・jquery.m4w.sprite_ex.jsに移動
+　　・シンプルなスプライトをSpriteクラスとする
+　　・SpriteExRendererクラスを追加
+　・Drawerクラスの簡略化
+　　・登録できる処理関数はひとつのみ(パラメータ名も"drawers"から"func"に変更)
+　・Drawerクラスのdrawメソッドをrenderメソッドに変更
+　　・Spriteに属する形に変更
+　・Sooundクラスをjquery.m4w.sound.jsに分離
+　・Thread,ThreadManagerクラスをjquery.m4w.thread.jsに分離
+　　・ThreadManagerの管理をm4wでの管理から実装者による管理に変更
+　・描画処理の変更
+　　・描画開始関数をScreenクラスに移動
+　　・描画停止関数を追加
+　・画面描画のintervalをwindow.m4wに移動
+　・ひとつのWindowに対して、ひとつのScreenに制限
+　　2つ以上作ろうとするとエラー発生
+　・特定のクラスでなくても、render(ctx)を実装しているオブジェクトならなんでもScreenRendererの対象になった
+　・Thread.check、Thread.waitingメソッドの廃止
+　　・checkはThread.updateメソッドの返却値で代用する
+　・Thread.pause、Thread.resumeメソッドの廃止

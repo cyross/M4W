@@ -1,0 +1,707 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf8" />
+		<meta name="generator" content="JsDoc Toolkit" />
+		
+		<title>JsDoc Reference - Sprite</title>
+
+		<style type="text/css">
+			/* default.css */
+body
+{
+	font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
+	width: 800px;
+}
+
+.header
+{
+	clear: both;
+	background-color: #ccc;
+	padding: 8px;
+}
+
+h1
+{
+	font-size: 150%;
+	font-weight: bold;
+	padding: 0;
+	margin: 1em 0 0 .3em;
+}
+
+hr
+{
+	border: none 0;
+	border-top: 1px solid #7F8FB1;
+	height: 1px;
+}
+
+pre.code
+{
+	display: block;
+	padding: 8px;
+	border: 1px dashed #ccc;
+}
+
+#index
+{
+	margin-top: 24px;
+	float: left;
+	width: 160px;
+	position: absolute;
+	left: 8px;
+	background-color: #F3F3F3;
+	padding: 8px;
+}
+
+#content
+{
+	margin-left: 190px;
+	width: 600px;
+}
+
+.classList
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0 0 0 8px;
+	font-family: arial, sans-serif;
+	font-size: 1em;
+	overflow: auto;
+}
+
+.classList li
+{
+	padding: 0;
+	margin: 0 0 8px 0;
+}
+
+.summaryTable { width: 100%; }
+
+h1.classTitle
+{
+	font-size:170%;
+	line-height:130%;
+}
+
+h2 { font-size: 110%; }
+caption, div.sectionTitle
+{
+	background-color: #7F8FB1;
+	color: #fff;
+	font-size:130%;
+	text-align: left;
+	padding: 2px 6px 2px 6px;
+	border: 1px #7F8FB1 solid;
+}
+
+div.sectionTitle { margin-bottom: 8px; }
+.summaryTable thead { display: none; }
+
+.summaryTable td
+{
+	vertical-align: top;
+	padding: 4px;
+	border-bottom: 1px #7F8FB1 solid;
+	border-right: 1px #7F8FB1 solid;
+}
+
+/*col#summaryAttributes {}*/
+.summaryTable td.attributes
+{
+	border-left: 1px #7F8FB1 solid;
+	width: 140px;
+	text-align: right;
+}
+
+td.attributes, .fixedFont
+{
+	line-height: 15px;
+	color: #002EBE;
+	font-family: "Courier New",Courier,monospace;
+	font-size: 13px;
+}
+
+.summaryTable td.nameDescription
+{
+	text-align: left;
+	font-size: 13px;
+	line-height: 15px;
+}
+
+.summaryTable td.nameDescription, .description
+{
+	line-height: 15px;
+	padding: 4px;
+	padding-left: 4px;
+}
+
+.summaryTable { margin-bottom: 8px; }
+
+ul.inheritsList
+{
+	list-style: square;
+	margin-left: 20px;
+	padding-left: 0;
+}
+
+.detailList {
+	margin-left: 20px; 
+	line-height: 15px;
+}
+.detailList dt { margin-left: 20px; }
+
+.detailList .heading
+{
+	font-weight: bold;
+	padding-bottom: 6px;
+	margin-left: 0;
+}
+
+.light, td.attributes, .light a:link, .light a:visited
+{
+	color: #777;
+	font-style: italic;
+}
+
+.fineprint
+{
+	text-align: right;
+	font-size: 10px;
+}
+		</style>
+	</head>
+
+	<body>
+<!-- ============================== header ================================= -->	
+		<!-- begin static/header.html -->
+		<div id="header">
+</div>
+		<!-- end static/header.html -->
+
+<!-- ============================== classes index ============================ -->
+		<div id="index">
+			<!-- begin publish.classesIndex -->
+			<div align="center"><a href="../index.html">Class Index</a>
+| <a href="../files.html">File Index</a></div>
+<hr />
+<h2>Classes</h2>
+<ul class="classList">
+	
+	<li><a href="../symbols/%24.html">$</a></li>
+	
+	<li><a href="../symbols/%24.fn.html">$.fn</a></li>
+	
+	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
+	
+	<li><a href="../symbols/AssetsLoader.html">AssetsLoader</a></li>
+	
+	<li><a href="../symbols/Drawer.html">Drawer</a></li>
+	
+	<li><a href="../symbols/M4W.html">M4W</a></li>
+	
+	<li><a href="../symbols/Screen.html">Screen</a></li>
+	
+	<li><a href="../symbols/ScreenRenderer.html">ScreenRenderer</a></li>
+	
+	<li><a href="../symbols/Sprite.html">Sprite</a></li>
+	
+	<li><a href="../symbols/SpriteRenderer.html">SpriteRenderer</a></li>
+	
+	<li><a href="../symbols/window.m4w.html">window.m4w</a></li>
+	
+</ul>
+<hr />
+			<!-- end publish.classesIndex -->
+		</div>
+		
+		<div id="content">
+<!-- ============================== class title ============================ -->
+			<h1 class="classTitle">
+				
+				Class Sprite
+			</h1>
+
+<!-- ============================== class summary ========================== -->			
+			<p class="description">
+				
+				
+			
+				スプライトを管理・操作
+				
+				
+					<br /><i>Defined in: </i> <a href="../symbols/src/jquery.m4w.js.html">jquery.m4w.js</a>.
+				
+			</p>
+
+<!-- ============================== constructor summary ==================== -->			
+			
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Sprite.">
+				<caption>Class Summary</caption>
+				<thead>
+					<tr>
+						<th scope="col">Constructor Attributes</th>
+						<th scope="col">Constructor Name and Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="attributes">&nbsp;</td>
+						<td class="nameDescription" >
+							<div class="fixedFont">
+								<b><a href="../symbols/Sprite.html#constructor">Sprite</a></b>()
+							</div>
+							<div class="description"></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+
+<!-- ============================== properties summary ===================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Sprite.">
+					<caption>Field Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Field Attributes</th>
+							<th scope="col">Field Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Sprite.html#a">a</a></b>
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Sprite.html#render">render</a></b>
+								</div>
+								<div class="description">スプライトを描画する<br>省略時はRenderer.default_render関数が指定される</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Sprite.html#x">x</a></b>
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/Sprite.html#y">y</a></b>
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+
+<!-- ============================== methods summary ======================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class Sprite.">
+					<caption>Method Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">Sprite.<b><a href="../symbols/Sprite.html#.load">load</a></b>()
+								</div>
+								<div class="description">音声ファイルを読み込む<br>audioタグを作り、再生ができるときに指定した関数を呼び出す</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">Sprite.<b><a href="../symbols/Sprite.html#.load_image">load_image</a></b>()
+								</div>
+								<div class="description">画像ファイルを読み込む<br>imgタグを作り、再生ができるときに指定した関数を呼び出す</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/Sprite.html#move">move</a></b>()
+								</div>
+								<div class="description">スプライトを移動させる<br>座標は、ブロックの左上が(0,0)で、値がプラスだと右・下方向、マイナスだと左・上方向となる</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+<!-- ============================== events summary ======================== -->
+			
+
+<!-- ============================== constructor details ==================== -->		
+			
+			<div class="details"><a name="constructor"> </a>
+				<div class="sectionTitle">
+					Class Detail
+				</div>
+				
+				<div class="fixedFont">
+						<b>Sprite</b>()
+				</div>
+				
+				<div class="description">
+					
+					
+				</div>
+				
+				
+				
+				
+					
+						<dl class="detailList">
+						<dt class="heading">Parameters:</dt>
+						
+							<dt>
+								 <b>options.id</b>
+								
+							</dt>
+								<dd>スプライトに一意に一位につけられるID<br>省略時はvalue属性(Imageオブジェクト)のidプロパティ</dd>
+						
+							<dt>
+								 <b>options.value</b>
+								
+							</dt>
+								<dd>スプライトの元にするImageクラス(Javascript標準クラス)のオブジェクト</dd>
+						
+							<dt>
+								 <b>options.x</b>
+								<i>Optional</i>
+							</dt>
+								<dd>ブロックの左端から右方向の位置(左端を0とする)<br>省略時は0</dd>
+						
+							<dt>
+								 <b>options.y</b>
+								<i>Optional</i>
+							</dt>
+								<dd>ブロックの左端から右方向の位置(左端を0とする)<br>省略時は0</dd>
+						
+							<dt>
+								 <b>options.a</b>
+								<i>Optional</i>
+							</dt>
+								<dd>描画時の透明度<br>0.0≦a≦1.0の間<br>0.0で完全透明、1.0で完全不透明<br>省略時は1.0</dd>
+						
+						</dl>
+					
+					
+					
+					
+					
+					
+					
+
+			</div>
+			
+
+<!-- ============================== field details ========================== -->		
+			
+				<div class="sectionTitle">
+					Field Detail
+				</div>
+				
+					<a name="a"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>a</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="render"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>render</b>
+					
+					</div>
+					<div class="description">
+						スプライトを描画する<br>省略時はRenderer.default_render関数が指定される
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="x"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>x</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="y"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>y</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					
+				
+			
+
+<!-- ============================== method details ========================= -->		
+			
+				<div class="sectionTitle">
+					Method Detail
+				</div>
+				
+					<a name=".load"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">Sprite.</span><b>load</b>()
+					
+					</div>
+					<div class="description">
+						音声ファイルを読み込む<br>audioタグを作り、再生ができるときに指定した関数を呼び出す
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>options.id</b>
+									
+								</dt>
+								<dd>スプライトに一意に一位につけられるID<br>内部で生成するImageオブジェクトも同じIDになる</dd>
+							
+								<dt>
+									<b>options.src</b>
+									
+								</dt>
+								<dd>対象ファイルのURLを配列で指定(マルチブラウザ対応)</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>スプライトを生成しているDeferredオブジェクト<br>コールバック関数の引数は、{type: "sprite", id: options.id, value: 生成したImageオブジェクト}で示すオブジェクト</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".load_image"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">Sprite.</span><b>load_image</b>()
+					
+					</div>
+					<div class="description">
+						画像ファイルを読み込む<br>imgタグを作り、再生ができるときに指定した関数を呼び出す
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>options.id</b>
+									
+								</dt>
+								<dd>画像に一意につけられるID</dd>
+							
+								<dt>
+									<b>options.src</b>
+									
+								</dt>
+								<dd>対象ファイルのURLを配列で指定(マルチブラウザ対応)</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>画像を読み込んでいるDeferredオブジェクト<br>コールバック関数の引数は、{type: "image", id: options.id, value: 生成したImageオブジェクト}で示すオブジェクト</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="move"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>move</b>()
+					
+					</div>
+					<div class="description">
+						スプライトを移動させる<br>座標は、ブロックの左上が(0,0)で、値がプラスだと右・下方向、マイナスだと左・上方向となる
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>options.x</b>
+									<i>Optional</i>
+								</dt>
+								<dd>左端を0とした時の右方向の位置<br>省略時は現在位置</dd>
+							
+								<dt>
+									<b>options.y</b>
+									<i>Optional</i>
+								</dt>
+								<dd>上端を0とした時の下方向の位置<br>省略時は現在位置</dd>
+							
+								<dt>
+									<b>options.dx</b>
+									<i>Optional</i>
+								</dt>
+								<dd>右方向をプラスとした時の移動量<br>省略時は0</dd>
+							
+								<dt>
+									<b>options.dy</b>
+									<i>Optional</i>
+								</dt>
+								<dd>下方向をプラスとした時の移動量<br>省略時は0</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+				
+			
+			
+<!-- ============================== event details ========================= -->		
+			
+			
+			<hr />
+		</div>
+
+		
+<!-- ============================== footer ================================= -->
+		<div class="fineprint" style="clear:both">
+			
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Sun May 19 2013 23:45:45 GMT+0900 (JST)
+		</div>
+	</body>
+</html>
