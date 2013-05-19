@@ -1,0 +1,17 @@
+div#game {
+  background: #008000;
+  position: absolute;
+  top: 192px;
+  left: 0;
+  width: 640;
+  height: 480;
+}
+
+div#button1 {
+  background-image: url('img/clickme.gif');
+  width: 128;
+  height: 48;
+  position: absolute;
+  top: 128px;
+  left: 0;
+}
