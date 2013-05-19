@@ -20,7 +20,7 @@
 ・ブラウザがサポートされているかの判別関数を追加(window.m4w.is_support)
 ・スマートフォンからの接続かどうかの判別関数を追加(window.m4w.is_smart_phone)
 
-2013/05/18
+2013/05/18-19
 ・大幅な仕様変更
 　・jquery.m4w.form.jsの削除
 　・Layer,Background,M4WDOMクラスの削除
@@ -55,3 +55,8 @@
 　・Thread.check、Thread.waitingメソッドの廃止
 　　・checkはThread.updateメソッドの返却値で代用する
 　・Thread.pause、Thread.resumeメソッドの廃止
+　・githubリポジトリ内容の置き換え
+
+2013/05/20
+・サンプル(0001)の追加
+・ドキュメントの修正

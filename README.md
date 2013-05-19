@@ -2,7 +2,7 @@
 
 version 0.0.1
 
-2013.05.19 Cyross Makoto
+2013.05.20 Cyross Makoto
 
 # はじめに
 
@@ -12,7 +12,7 @@ version 0.0.1
 
  1. Webサーバ
   * ApacheでもRuby on RailsでもSinatraでもnode.js...etc
-  * もしくは、Phonegapなどのハイブリッドアプリ開発ツール
+  * もしくは、Phonegapなどの、HTML5/Javascriptを使用するハイブリッドアプリ開発ツール
   * 推奨:Ruby on Rails 3.1以降が動く環境  
     できれば3.2以降
  2. jQuery
@@ -47,20 +47,91 @@ version 0.0.1
 
 実際の例は以下
 
+ * index.html
     <DOCTYPE HTML>
     <html>
       <head>
         <meta charset=utf-8>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Miyako 4 Web sample</title>
-        <link rel="stylesheet" href="jq.css" type="text/css" />
+        <title>Miyako 4 Web sample 0001</title>
+        <link rel="stylesheet" href="main.css" type="text/css" />
         <script type="text/javascript" src="jquery-2.0.0.js"></script>
         <script type="text/javascript" src="jquery.m4w.js"></script>
-        <script type="text/javascript" src="jq.js"></script>
+        <script type="text/javascript" src="main.js"></script>
       </head>
       <body>
+        <h2>10秒後に止まります</h2>
+        <p>ボタンをクリックすると、少しずつスプライトが下に移動します</p>
+        <div id="message1"></div>
+        <div id="message2"></div>
+        <div id="game"></div>
+        <div id="button1"></div>
       </body>
     </html>
+ * main.css
+    div#game {
+      background: #008000;
+      position: absolute;
+      top: 192px;
+      left: 0;
+      width: 640;
+      height: 480;
+    }
+    
+    div#button1 {
+      background-image: url('img/clickme.gif');
+      width: 128;
+      height: 48;
+      position: absolute;
+      top: 128px;
+      left: 0;
+    }
+ * main.js
+    $(document).ready(function(){
+      // メインロジック
+      var main_logic = function(){
+        window.m4w.screen.sprites[1].move({dx:1,dy:0});
+      };
+    
+      // アセットロード終了時の処理
+      // ・メインロジックの登録
+      // ・ボタン押下次の処理の追加
+      var on_ready = function(assets){
+        window.m4w.screen.sprites.push(assets.sprite.s01);
+        window.m4w.main_logic = main_logic;
+        $("#button1").on("click", function(){
+          window.m4w.screen.sprites[1].move({dx:0,dy:4});
+        });
+      }
+    
+      // M4Wの初期化
+      var body = $("#game");
+      body.m4w();
+    
+      // タイマー・カウント表示をスプライトとして実装
+      // (本来は、メインロジックに入れるべきだが、スプライトの応用例として実装)
+      window.count = 0;
+      body.m4w.screen.sprites.push({
+        render: function(ctx){
+          window.count++;
+          $("#message2").html("Time: "+(new Date()).getTime() + "/ Count: " + window.count);
+        }
+      });
+    
+      // スタート時の時間を表示
+      $("#message1").html("Time: "+(new Date()).getTime());
+      // アセットのロード
+      AssetsLoader.load({
+        assets: [{type: "sprite", id: "s01", src:"img/sampleimage.gif"}],
+        success: on_ready
+      });
+    
+      // メインループの開始
+      window.m4w.main_loop();
+    
+      // 10秒後にメインループを終了するように設定
+      window.setTimeout(window.m4w.stop_main_loop, 10000);
+    });
 
 # リファレンスマニュアル
 
@@ -91,6 +162,10 @@ version 0.0.1
 この場を借りて御礼申し上げます。
 
 http://kudox.jp/html-css/html5-canvas-animation
+
+サンプルに使用している画像の一部は、以下のボタン作成サイトを利用しています。
+
+http://box.aflat.com/buttonmaker/
 
 # 連絡先
 
