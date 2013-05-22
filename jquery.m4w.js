@@ -256,10 +256,12 @@
   Screen.prototype.resize = function(width, height){
     var w = parseInt(width);
     var h = parseInt(height);
+    this.width = w;
+    this.height = h;
     this.layer.css("width", w);
     this.layer.css("height", h);
-    this.layer[0].width = w;
-    this.layer[0].height = h;
+    this.layer[0].width = (typeof content_width !== 'undefined' ? parseInt(content_width) : w);
+    this.layer[0].height = (typeof content_height !== 'undefined' ? parseInt(content_height) : h);
   };
 
   /** 画面の位置を変更する
