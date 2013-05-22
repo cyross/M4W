@@ -188,6 +188,12 @@
       events: {},
       z: 0
     }, options);
+
+    var cw = o.width;
+    var ch = o.height;
+    if("content_width" in o){ cw = o.content_width; }
+    if("content_height" in o){ ch = o.content_height; }
+
     var $layer = window.m4w.create_canvas(o);
 
     $layer.appendTo(o.body);
@@ -204,11 +210,11 @@
     /**
      * @property 描画領域幅
      */
-    this.content_width = o.content_width;
+    this.content_width = cw;
     /**
      * @property 描画領域高さ
      */
-    this.content_height = o.content_height;
+    this.content_height = ch;
     /**
      * @property 画面レイヤ
      */
@@ -498,32 +504,32 @@
    */
   window.m4w._game_loop = function(){
     // メインロジック実行
-    this.main_logic();
+    window.m4w.main_logic();
     // 外部から停止リクエストが来たときは終了
-    if(this.is_stop){
-      window.cancelAnimFrame(this.rendering_id);
-      this.is_stop = false;
+    if(window.m4w.is_stop){
+      window.cancelAnimFrame(window.m4w.rendering_id);
+      window.m4w.is_stop = false;
       return;
     }
     // 画面描画
-    this.screen.render();
+    window.m4w.screen.render();
     // 次のループ実行を設定
-    this.rendering_id = window.requestAnimFrame(this._game_loop.bind(this));
-  }.bind(window.m4w);
+    window.m4w.rendering_id = window.requestAnimFrame(window.m4w._game_loop.bind(window.m4w));
+  };
 
   /**
    * ゲームループ開始
    */
   window.m4w.main_loop = function(){
-    this.rendering_id = window.requestAnimFrame(this._game_loop.bind(this));
-  }.bind(window.m4w);
+    window.m4w.rendering_id = window.requestAnimFrame(window.m4w._game_loop.bind(window.m4w));
+  };
 
   /**
    * ゲームループを停止する
    */
   window.m4w.stop_main_loop = function(){
-    this.is_stop = true;
-  }.bind(window.m4w);
+    window.m4w.is_stop = true;
+  };
 
   /**
    * Canvasタグを作成する
@@ -541,8 +547,6 @@
     var o = $.extend({
       width: 640,
       height: 480,
-      content_width: 640,
-      content_height: 480,
       position: "relative",
       left: 0,
       top: 0,

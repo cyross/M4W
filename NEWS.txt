@@ -69,3 +69,12 @@
 ・M4W.varsをwindow.m4w.varsに移動
 ・window.m4w.input_varsを追加
 ・サンプル0002を追加
+
+2013/05/22
+・サンプル0003を追加
+
+2013/05/23
+・window.m4w.main_loop、window.m4w._game_loop、window.m4w.stop_main_loopの
+　呼び出しタイミングによっては、screenなどが取得できない問題を修正
+・Drawerの修正
+・サンプル0004を追加

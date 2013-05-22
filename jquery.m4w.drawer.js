@@ -31,9 +31,9 @@
    * 画面の図形の描画を行う
    */
   Drawer.prototype.render = function(ctx){
- 	  this.func.render(ctx);
+ 	  this.func(ctx);
   	return this;
   };
 
-  window.m4w = $.extend({Sound: Sound}, window.m4w);
+  window.m4w = $.extend({Drawer: Drawer}, window.m4w);
 })(jQuery);
