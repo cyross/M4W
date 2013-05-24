@@ -79,3 +79,6 @@
 ・Drawerの修正
 ・サンプル0004を追加
 ・Screen.resizeメソッドのバグを修正
+
+2013/05/23
+・jquery.m4w.thread.jsを削除
