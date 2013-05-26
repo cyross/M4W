@@ -98,10 +98,10 @@
    * @param [options.y] ブロックの左端から右方向の位置(左端を0とする)<br>省略時は0
    * @param [options.a] 描画時の透明度<br>0.0≦a≦1.0の間<br>0.0で完全透明、1.0で完全不透明<br>省略時は1.0
    * @param [options.r] 回転角度<br>単位はラジアン<br>省略時は0.0
-   * @param [options.tx] 拡大角度(横方向)<br>省略時は1.0
-   * @param [options.ty] 拡大角度(縦方向)<br>省略時は1.0
-   * @param [options.scx] 拡大角度(横方向)<br>省略時は1.0
-   * @param [options.scy] 拡大角度(縦方向)<br>省略時は1.0
+   * @param [options.tx] 回転・拡大縮小の中心位置(x方向)<br>省略時は画像の幅の半分
+   * @param [options.ty] 回転・拡大縮小の中心位置(y方向)<br>省略時は画像の高さの半分
+   * @param [options.scx] 拡大率(x横方向)<br>省略時は1.0
+   * @param [options.scy] 拡大率(y方向)<br>省略時は1.0
    * @param [options.sx] 画像内の右方向の描画開始位置<br>省略時は0
    * @param [options.sy] 画像内の下方向の描画開始位置
    * @param [options.sw] 画像内の描画幅<br>省略時は画像と同じ幅
@@ -115,7 +115,9 @@
     var o = $.extend({
       id: options.value.id,
       x:0, y:0, a:1.0,
-      r:0.0, scx:1.0, scy:1.0, tx: 0.0, ty: 0.0,
+      r:0.0, scx:1.0, scy:1.0,
+      tx:options.value.width/2,
+      ty:options.value.height/2,
       sx:0, sy:0, sw:options.value.width, sh:options.value.height,
       dx:0, dy:0, dw:options.value.width, dh:options.value.height }, options);
     this.id = o.id;
@@ -126,15 +128,15 @@
     this.y = o.y;
     /** @property 描画時の透明度<br>0≦a≦1の間<br>0で完全透明、1で完全不透明 */
     this.a = o.a;
-    /** @property 変換マトリクスの左上値<br>transform,reset_matrixメソッドでも操作可 */
+    /** @property 回転角度<br>単位はラジアン<br>省略時は0.0 */
     this.r = o.r;
-    /** @property 変換マトリクスの右上値<br>transform,reset_matrixメソッドでも操作可 */
+    /** @property 拡大率(x横方向)<br>省略時は1.0 */
     this.scx = o.scx;
-    /** @property 変換マトリクスの右上値<br>transform,reset_matrixメソッドでも操作可 */
+    /** @property 拡大率(y方向)<br>省略時は1.0 */
     this.scy = o.scy;
-    /** @property 変換マトリクスの左下値<br>transform,reset_matrixメソッドでも操作可 */
+    /** @property 回転・拡大縮小の中心位置(x方向)<br>省略時は画像の幅の半分 */
     this.tx = o.tx;
-    /** @property 変換マトリクスの左下値<br>transform,reset_matrixメソッドでも操作可 */
+    /** @property 回転・拡大縮小の中心位置(y方向)<br>省略時は画像の高さの半分 */
     this.ty = o.ty;
     /** @property 画像内の右方向の描画開始位置<br>省略時は0 */
     this.sx = o.sx;

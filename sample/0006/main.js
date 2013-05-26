@@ -28,8 +28,7 @@ $(document).ready(function(){
           a: (i%2==0?0.5:1.0),
           scx: scx,
           scy: scy,
-          tx: 32,
-          ty: 32
+          ty: 32 // 画像の高さが違うため、tyを指定
          }));
       // 回転用スプライト
       sprites2.push(new SpriteEx({
@@ -39,8 +38,7 @@ $(document).ready(function(){
           x: i*64,
           y: 240+i*16,
           a: (i%2==0?0.5:1.0),
-          tx: 32,
-          ty: 32
+          ty: 32 // 画像の高さが違うため、tyを指定
          }));
     }
 

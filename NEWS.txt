@@ -83,7 +83,7 @@
 2013/05/25
 ・jquery.m4w.thread.jsを削除
 
-2013/05/26
+2013/05/27
 ・README.mdの謝辞の内容を修正
 ・window.m4w.user_agentメソッドを追加
 ・window.m4w.is_supported, window.m4w.is_smart_phoneメソッドを削除
@@ -92,3 +92,4 @@
 ・サンプル0005を追加
 ・サンプル0006を追加
 ・ドキュメントの修正
+・SpriteExクラスコンストラクタの説明を修正
