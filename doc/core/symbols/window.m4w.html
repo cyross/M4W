@@ -241,7 +241,9 @@ ul.inheritsList
 </ul>
 また、以下のプロパティが利用可能
 <ul>
-<li>interval(画面の描画間隔、初期値は60(60fps相当)、ただし、間隔取得にsetTimeoutを使用するときのみ</li>
+<li>interval(画面の描画間隔、初期値は60(60fps相当)、ただし、間隔取得にsetTimeoutを使用するときのみ)</li>
+<li>vars(データ共有オブジェクト　初期は空のオブジェクト)</li>
+<li>input_vars(入力デバイス関連情報共有オブジェクト<br>初期は空のオブジェクト)</li>
 </ul>
 				
 				
@@ -291,6 +293,16 @@ ul.inheritsList
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
+								window.m4w.<b><a href="../symbols/window.m4w.html#.input_vars">input_vars</a></b>
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
 								window.m4w.<b><a href="../symbols/window.m4w.html#.interval">interval</a></b>
 								</div>
 								<div class="description"></div>
@@ -312,6 +324,16 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont">
 								window.m4w.<b><a href="../symbols/window.m4w.html#.rendering_id">rendering_id</a></b>
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								window.m4w.<b><a href="../symbols/window.m4w.html#.vars">vars</a></b>
 								</div>
 								<div class="description"></div>
 							</td>
@@ -350,24 +372,6 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">window.m4w.<b><a href="../symbols/window.m4w.html#.is_smart_phone">is_smart_phone</a></b>()
-								</div>
-								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">window.m4w.<b><a href="../symbols/window.m4w.html#.is_supported">is_supported</a></b>()
-								</div>
-								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
 								<div class="fixedFont">window.m4w.<b><a href="../symbols/window.m4w.html#.main_logic">main_logic</a></b>()
 								</div>
 								<div class="description"></div>
@@ -389,6 +393,15 @@ ul.inheritsList
 								<div class="fixedFont">window.m4w.<b><a href="../symbols/window.m4w.html#.stop_main_loop">stop_main_loop</a></b>()
 								</div>
 								<div class="description">ゲームループを停止する</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">window.m4w.<b><a href="../symbols/window.m4w.html#.user_agent">user_agent</a></b>()
+								</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -441,6 +454,28 @@ ul.inheritsList
 					Field Detail
 				</div>
 				
+					<a name=".input_vars"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">window.m4w.</span><b>input_vars</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name=".interval"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -490,6 +525,28 @@ ul.inheritsList
 					
 					
 					<span class="light">window.m4w.</span><b>rendering_id</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".vars"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">window.m4w.</span><b>vars</b>
 					
 					</div>
 					<div class="description">
@@ -599,56 +656,6 @@ ul.inheritsList
 
 					<hr />
 				
-					<a name=".is_smart_phone"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">window.m4w.</span><b>is_smart_phone</b>()
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".is_supported"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">window.m4w.</span><b>is_supported</b>()
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name=".main_logic"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -722,6 +729,31 @@ ul.inheritsList
 						
 						
 
+					<hr />
+				
+					<a name=".user_agent"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">window.m4w.</span><b>user_agent</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
 					
 				
 			
@@ -736,7 +768,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon May 20 2013 01:39:52 GMT+0900 (JST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon May 27 2013 02:37:42 GMT+0900 (JST)
 		</div>
 	</body>
 </html>

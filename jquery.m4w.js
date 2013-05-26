@@ -1,7 +1,8 @@
 /**
  * @fileOverview Miyako4Web(Miyako for Web a.k.a M4W/m4w)本体<br>
  * Thanks Kudox.jp(http://kudox.jp/html-css/html5-canvas-animation)<br>
- * 
+ * Thanks Asial blog(http://blog.asial.co.jp/883)
+ *
  * @name Miyako for Web(M4W)
  * @author Cyross Makoto (サイロス誠)
  * @version 0.0.1
@@ -235,7 +236,7 @@
      * @property 画面レンダラ
      */
     this.render = o.renderer.bind(this);
-    
+
     for(name in o.css){ $layer.css(name, o.css[name]); }
     for(name in o.attr){ $layer.attr(name, o.attr[name]); }
     for(name in o.events){
@@ -301,14 +302,14 @@
    * 画像ファイルを読み込む<br>imgタグを作り、再生ができるときに指定した関数を呼び出す
    * @param options.id 画像に一意につけられるID
    * @param options.src 対象ファイルのURLを配列で指定(マルチブラウザ対応)
-   * @return 画像を読み込んでいるDeferredオブジェクト<br>コールバック関数の引数は、{type: "image", id: options.id, value: 生成したImageオブジェクト}で示すオブジェクト
+   * @return 画像を読み込んでいるDeferredオブジェクト<br>コールバック関数の引数は、{type: "image", id: options.id, value: 生成したImageオブジェクト. options: 生成時のオプション}で示すオブジェクト
    */
   Sprite.load_image = function(options){
     var defer = $.Deferred();
     var img_id = options.id;
     var img = new Image();
     img.src = options.src+ "?" + new Date().getTime();
-    img.onload = function(){ defer.resolve({type: "image", id: img_id, value: img}); };
+    img.onload = function(){ defer.resolve({type: "image", id: img_id, value: img, options: options}); };
     return defer.promise();
   };
 
@@ -316,12 +317,12 @@
    * 音声ファイルを読み込む<br>audioタグを作り、再生ができるときに指定した関数を呼び出す
    * @param options.id スプライトに一意に一位につけられるID<br>内部で生成するImageオブジェクトも同じIDになる
    * @param options.src 対象ファイルのURLを配列で指定(マルチブラウザ対応)
-   * @return スプライトを生成しているDeferredオブジェクト<br>コールバック関数の引数は、{type: "sprite", id: options.id, value: 生成したImageオブジェクト}で示すオブジェクト
+   * @return スプライトを生成しているDeferredオブジェクト<br>コールバック関数の引数は、{type: "sprite", id: options.id, value: 生成したImageオブジェクト. options: 生成時のオプション}で示すオブジェクト
    */
   Sprite.load = function(options){
     var defer = $.Deferred();
     Sprite.load_image(options).then(function(obj){
-      defer.resolve({type: "sprite", id: obj.id, value: new Sprite(obj)});
+      defer.resolve({type: "sprite", id: obj.id, value: new Sprite($.extend(options, obj)), options: options});
     });
     return defer.promise();
   };
@@ -357,7 +358,7 @@
            window.msRequestAnimationFrame     ||
            function(/* function */ callback){ return window.setTimeout(callback, 1000/window.m4w.interval); };
   }());
-  
+
   /**
    * 描画停止関数を取得(内部で使用)<br>
    * Thanks Kudox.jp(http://kudox.jp/html-css/html5-canvas-animation)<br>
@@ -408,12 +409,12 @@
     AssetsLoader.load(options);
     return this.body;
   };
-  
+
   /**
    * windowオブジェクト
    * @name window
   */
-  
+
   /**
    * @namespace 各種クラスの外部アクセス用名前空間<br>以下のクラスが利用可能
    * <ul>
@@ -442,39 +443,16 @@
     Sprite: Sprite,
     SpriteRenderer: SpriteRenderer,
     ScreenRenderer: ScreenRenderer,
-    is_supported: function(){
-      // 対応ブラウザは、今のところIE9以降のみ
-      var user_agent = window.navigator.userAgent.toLowerCase();
-      var version = window.navigator.appVersion.toLowerCase();
-      if(user_agent.indexOf("msie") > -1){
-        // IE6 -> false
-        if(version.indexOf("msie 6") > -1){ return false; }
-        // IE7 -> false
-        if(version.indexOf("msie 7") > -1){ return false; }
-        // IE8 -> false
-        if(version.indexOf("msie 8") > -1){ return false; }
-        // IE9以降 -> true
-      }
-      return true;
-    },
-    is_smart_phone: function(){
-      var user_agent = window.navigator.userAgent.toLowerCase();
-      var version = window.navigator.appVersion.toLowerCase();
-      // iPhone
-      if(user_agent.indexOf("iphone") > -1){ return true; }
-      // iPad
-      if(user_agent.indexOf("ipad") > -1){ return true; }
-      // iPod(touch)
-      if(user_agent.indexOf("ipod") > -1){ return true; }
-      // android端末
-      if(user_agent.indexOf("android") > -1){ return true; }
-      // blackberry
-      if(user_agent.indexOf("blackberry") > -1){ return true; }
-      // WindowsPhone端末
-      if(user_agent.indexOf("windowsphone") > -1){ return true; }
-      // その他
-      return false;
-    },
+    /**
+     * @property ユーザーエージェントを返す関数<br>
+     * 返されるオブジェクトは、user_agent, versionの2つのプロパティを持つ<br>
+     */
+    user_agent: function(){
+        var result = {};
+        result.user_agent = window.navigator.userAgent.toLowerCase();
+        result.version = window.navigator.appVersion.toLowerCase();
+        return result;
+      },
     /**
      * @property 画面更新間隔(初期値:60(fps))
      */
@@ -572,13 +550,13 @@
   /**
    * jQueryオブジェクトの別名(http://jquery.com/)
    * @name $
-   * @class 
+   * @class
    */
-  
+
   /**
    * jQueryオブジェクトのプラグイン関数(http://jquery.com/)
    * @name $.fn
-   * @class 
+   * @class
    */
 
    /**
@@ -598,7 +576,7 @@
       assets: null,
       body: $(this)
     }, options);
-   
+
     $.extend($(this).m4w, new M4W(o));
     if(o.assets != null){ $(this).m4w.add_assets(o.assets); }
   };

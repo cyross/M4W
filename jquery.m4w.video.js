@@ -57,7 +57,7 @@
    * @param [options.body] ビデオを埋め込むブロック<br>jQueryオブジェクトを指定<br>省略時はbodyブロック($("body"))
    * @param [options.loop] ビデオを繰り返し再生するかを指定<br>省略時はfalse(繰り返さない)
    * @param [options.autofinish] 再生終了時、自動的にvideoタグを取り除くかを指定<br>省略時はfalse(取り除かない)
-   * @return ビデオを再生できる状態に持ち込んでいるDeferredオブジェクト<br>コールバック関数の引数は、{type: "video", id: options.id, value: 生成したVideoオブジェクト}で示すオブジェクト
+   * @return ビデオを再生できる状態に持ち込んでいるDeferredオブジェクト<br>コールバック関数の引数は、{type: "video", id: options.id, value: 生成したVideoオブジェクト. options: 生成時のオプション}で示すオブジェクト
    */
   Video.load = function(options){
     var o = $.extend({
@@ -71,7 +71,7 @@
       autofinish: false,
       body: $("body")
     }, options);
-    
+
     var $area = $("<video />");
     var defer = $.Deferred();
 
@@ -84,7 +84,7 @@
     $area.css("top", o.top);
     $area.css("left", o.left);
     $area.css("z-index", o.z);
-    
+
     for(var i=0; i<o.src.length; i++){
       var $src = $("<source />");
       var url = o.src[i] + "?" + new Date().getTime();
@@ -99,7 +99,7 @@
       var d = defer;
       var video_id = o.id;
       var body = $area;
-      return function(){ d.resolve({type: "video", id: video_id, value: new Video(video_id, body)}); };
+      return function(){ d.resolve({type: "video", id: video_id, value: new Video(video_id, body), options: o}); };
     }).bind(this)());
 
     if(o.autofinish == true){

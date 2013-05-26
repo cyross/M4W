@@ -54,11 +54,13 @@
    */
   SpriteExRenderer.default_render = function(context){
     context.save();
-    context.setTransform(this.m11,this.m12,this.m21,this.m22,this.x-this.dx,this.y-this.dy);
-    context.translate(this.dx,this.dy);
+    context.translate(this.x + this.tx, this.y + this.ty);
+    context.rotate(this.r);
+    context.scale(this.scx,this.scy);
+    context.translate(-this.tx, -this.ty);
     context.globalAlpha = this.a;
-    context.drawImage(this.image, this.sx, this.sy, this.sw, this.sh, this.x, this.y, this.dw, this.dh);
-    context.restore();
+    context.drawImage(this.image, this.sx, this.sy, this.sw, this.sh, 0, 0, this.dw, this.dh);
+    context.setTransform(1, 0, 0, 1, 0, 0);
   };
 
   /**
@@ -95,10 +97,11 @@
    * @param [options.x] ブロックの左端から右方向の位置(左端を0とする)<br>省略時は0
    * @param [options.y] ブロックの左端から右方向の位置(左端を0とする)<br>省略時は0
    * @param [options.a] 描画時の透明度<br>0.0≦a≦1.0の間<br>0.0で完全透明、1.0で完全不透明<br>省略時は1.0
-   * @param [options.m11] 変換マトリクスの左上値<br>transform,reset_matrixメソッドでも操作可<br>省略時は1.0
-   * @param [options.m12] 変換マトリクスの右上値<br>transform,reset_matrixメソッドでも操作可<br>省略時は0.0
-   * @param [options.m21] 変換マトリクスの左下値<br>transform,reset_matrixメソッドでも操作可<br>省略時は0.0
-   * @param [options.m22] 変換マトリクスの右下値<br>transform,reset_matrixメソッドでも操作可<br>省略時は1.0
+   * @param [options.r] 回転角度<br>単位はラジアン<br>省略時は0.0
+   * @param [options.tx] 拡大角度(横方向)<br>省略時は1.0
+   * @param [options.ty] 拡大角度(縦方向)<br>省略時は1.0
+   * @param [options.scx] 拡大角度(横方向)<br>省略時は1.0
+   * @param [options.scy] 拡大角度(縦方向)<br>省略時は1.0
    * @param [options.sx] 画像内の右方向の描画開始位置<br>省略時は0
    * @param [options.sy] 画像内の下方向の描画開始位置
    * @param [options.sw] 画像内の描画幅<br>省略時は画像と同じ幅
@@ -112,7 +115,7 @@
     var o = $.extend({
       id: options.value.id,
       x:0, y:0, a:1.0,
-      m11:1.0, m12:0.0, m21:0.0, m22:1.0,
+      r:0.0, scx:1.0, scy:1.0, tx: 0.0, ty: 0.0,
       sx:0, sy:0, sw:options.value.width, sh:options.value.height,
       dx:0, dy:0, dw:options.value.width, dh:options.value.height }, options);
     this.id = o.id;
@@ -124,13 +127,15 @@
     /** @property 描画時の透明度<br>0≦a≦1の間<br>0で完全透明、1で完全不透明 */
     this.a = o.a;
     /** @property 変換マトリクスの左上値<br>transform,reset_matrixメソッドでも操作可 */
-    this.m11 = o.m11;
+    this.r = o.r;
     /** @property 変換マトリクスの右上値<br>transform,reset_matrixメソッドでも操作可 */
-    this.m12 = o.m12;
+    this.scx = o.scx;
+    /** @property 変換マトリクスの右上値<br>transform,reset_matrixメソッドでも操作可 */
+    this.scy = o.scy;
     /** @property 変換マトリクスの左下値<br>transform,reset_matrixメソッドでも操作可 */
-    this.m21 = o.m21
-    /** @property 変換マトリクスの右下値<br>transform,reset_matrixメソッドでも操作可 */
-    this.m22 = o.m22;
+    this.tx = o.tx;
+    /** @property 変換マトリクスの左下値<br>transform,reset_matrixメソッドでも操作可 */
+    this.ty = o.ty;
     /** @property 画像内の右方向の描画開始位置<br>省略時は0 */
     this.sx = o.sx;
     /** @property 画像内の下方向の描画開始位置 */
@@ -139,13 +144,13 @@
     this.sw = o.sw;
     /** @property 画像内の描画高さ<br>省略時は画像と同じ高さ */
     this.sh = o.sh;
-    /** @property レイヤ内の右方向の描画開始位置<br>xの位置より右にずれる<br>省略時は0 */
+    /** @property 画面右方向の描画開始位置<br>xの位置より右にずれる<br>省略時は0 */
     this.dx = o.dx;
-    /** @property レイヤ内の下方向の描画開始位置<br>yの位置より下にずれる<br>省略時は0 */
+    /** @property 画面下方向の描画開始位置<br>yの位置より下にずれる<br>省略時は0 */
     this.dy = o.dy;
-    /** @property レイヤ内の描画幅<br>swの値から拡大/縮小して描画される<br>省略時はswと同じ値 */
+    /** @property 画面内の描画幅<br>swの値から拡大/縮小して描画される<br>省略時はswと同じ値 */
     this.dw = o.dw;
-    /** @property レイヤ内の描画高さ<br>shの値から拡大/縮小して描画される<br>省略時はshと同じ値 */
+    /** @property 画面内の描画高さ<br>shの値から拡大/縮小して描画される<br>省略時はshと同じ値 */
     this.dh = o.dh;
   };
 
@@ -153,15 +158,20 @@
    * 音声ファイルを読み込む<br>audioタグを作り、再生ができるときに指定した関数を呼び出す
    * @param options.id スプライトに一意に一位につけられるID<br>内部で生成するImageオブジェクトも同じIDになる
    * @param options.src 対象ファイルのURLを配列で指定(マルチブラウザ対応)
-   * @return スプライトを生成しているDeferredオブジェクト<br>コールバック関数の引数は、{type: "sprite", id: options.id, value: 生成したImageオブジェクト}で示すオブジェクト
+   * @return スプライトを生成しているDeferredオブジェクト<br>コールバック関数の引数は、{type: "sprite", id: options.id, value: 生成したImageオブジェクト. options: 生成時のオプション}で示すオブジェクト
    */
   SpriteEx.load = function(options){
     var defer = $.Deferred();
     SpriteEx.load_image(options).then(function(obj){
-      defer.resolve({type: "sprite", id: obj.id, value: new Sprite(obj)});
+      defer.resolve({type: "sprite", id: obj.id, value: new SpriteEx($.extend(options, obj)), options: options});
     });
     return defer.promise();
   };
+
+  /**
+   * @ignore
+   */
+  SpriteEx.load_image = Sprite.load_image;
 
   /**
    * スプライトを描画する<br>省略時はRenderer.default_render関数が指定される

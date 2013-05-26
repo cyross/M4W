@@ -7,7 +7,7 @@
 	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
 	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/**
 <span class='line'>  2</span>  * @fileOverview Miyako4Web(Miyako for Web a.k.a M4W/m4w) Drawer Extension&lt;br>
-<span class='line'>  3</span>  * M4W用図形簿ゆが対応拡張プラグイン
+<span class='line'>  3</span>  * M4W用図形描画応拡張プラグイン
 <span class='line'>  4</span>  * このファイルを読み込むと、window.m4wオブジェクトに以下のプロパティが追加される&lt;br>
 <span class='line'>  5</span>  * window.m4w.Drawer&lt;br>
 <span class='line'>  6</span>  *
@@ -32,16 +32,16 @@
 <span class='line'> 25</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 26</span> </span><span class="WHIT">    </span><span class="COMM">// 直接インスタンスオブジェクトにパラメータの内容を結合</span><span class="WHIT">
 <span class='line'> 27</span> </span><span class="WHIT">    </span><span class="NAME">$.extend</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">o</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 28</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 28</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 29</span> 
 <span class='line'> 30</span> </span><span class="WHIT">  </span><span class="COMM">/**
 <span class='line'> 31</span>    * 画面の図形の描画を行う
 <span class='line'> 32</span>    */</span><span class="WHIT">
 <span class='line'> 33</span> </span><span class="WHIT">  </span><span class="NAME">Drawer.prototype.render</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">ctx</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 34</span> </span><span class="WHIT"> 	  </span><span class="NAME">this.func.render</span><span class="PUNC">(</span><span class="NAME">ctx</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 34</span> </span><span class="WHIT"> 	  </span><span class="NAME">this.func</span><span class="PUNC">(</span><span class="NAME">ctx</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 35</span> </span><span class="WHIT">  	</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">this</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 36</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 37</span> 
-<span class='line'> 38</span> </span><span class="WHIT">  </span><span class="NAME">window.m4w</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$.extend</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="NAME">Sound</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">Sound</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">window.m4w</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="WHIT">  </span><span class="NAME">window.m4w</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$.extend</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="NAME">Drawer</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">Drawer</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">window.m4w</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 39</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="NAME">jQuery</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 40</span> </span></pre></body></html>

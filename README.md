@@ -13,7 +13,7 @@ version 0.0.1
  1. Webサーバ
   * ApacheでもRuby on RailsでもSinatraでもnode.js...etc
   * もしくは、Phonegapなどの、HTML5/Javascriptを使用するハイブリッドアプリ開発ツール
-  * 推奨:Ruby on Rails 3.1以降が動く環境  
+  * 推奨:Ruby on Rails 3.1以降が動く環境
     できれば3.2以降
  2. jQuery
   * 1.9.0/2.0.0以降
@@ -40,9 +40,9 @@ version 0.0.1
  3. HTML上でjQuery-X.Y.Z.jsのロードを追加する(jQuery-X.Y.Z.min.jsでも可)
  4. HTML上でjQuery.m4w.jsのロードを追加する
  5. jQueryオブジェクトのm4wメソッドを呼び出す
-   * 例1・bodyブロック内  
+   * 例1・bodyブロック内
        $("body").m4w();
-   * 例2・divブロック内(id=area1)  
+   * 例2・divブロック内(id=area1)
        $("div#area1").m4w();
 
 実際の例は以下
@@ -80,7 +80,7 @@ version 0.0.1
       width: 640;
       height: 480;
     }
-    
+
     div#button1 {
       background-image: url('img/clickme.gif');
       width: 128;
@@ -97,7 +97,7 @@ version 0.0.1
       var main_logic = function(){
         window.m4w.screen.sprites[1].move({dx:1,dy:0});
       };
-    
+
       // アセットロード終了時の処理
       // ・メインロジックの登録
       // ・ボタン押下次の処理の追加
@@ -108,11 +108,11 @@ version 0.0.1
           window.m4w.screen.sprites[1].move({dx:0,dy:4});
         });
       }
-    
+
       // M4Wの初期化
       var body = $("#game");
       body.m4w();
-    
+
       // タイマー・カウント表示をスプライトとして実装
       // (本来は、メインロジックに入れるべきだが、スプライトの応用例として実装)
       window.count = 0;
@@ -122,7 +122,7 @@ version 0.0.1
           $("#message2").html("Time: "+(new Date()).getTime() + "/ Count: " + window.count);
         }
       });
-    
+
       // スタート時の時間を表示
       $("#message1").html("Time: "+(new Date()).getTime());
       // アセットのロード
@@ -130,17 +130,17 @@ version 0.0.1
         assets: [{type: "sprite", id: "s01", src:"img/sampleimage.gif"}],
         success: on_ready
       });
-    
+
       // メインループの開始
       window.m4w.main_loop();
-    
+
       // 10秒後にメインループを終了するように設定
       window.setTimeout(window.m4w.stop_main_loop, 10000);
     });
 
 # リファレンスマニュアル
 
-展開した時に同梱される doc ディレクトリをご参照ください  
+展開した時に同梱される doc ディレクトリをご参照ください
 `docディレクトリのドキュメントは、「JsDoc Toolkit v2.4.0」を使用しています。`
 
 # ラインセンス
@@ -149,16 +149,16 @@ version 0.0.1
 
 > The MIT License (MIT)
 > Copyright (c) 2012-2013 Cyross Makoto
-> 
+>
 > Permission is hereby granted, free of charge, to any person obtaining a copy ofis software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-> 
+>
 > The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-> 
+>
 > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 # 免責事項
 
-本ソフトウェアは、MITライセンスに準拠し、無保証とします。  
+本ソフトウェアは、MITライセンスに準拠し、無保証とします。
 本ソフトウェアを使用したことにより、いかなる問題が発生したとしても、作者であるサイロス誠には一切の責任を負いません。
 
 # 謝辞
@@ -177,6 +177,6 @@ http://box.aflat.com/buttonmaker/
 もし、何かしらの質問や要望などがございましたら、下記のメールアドレスかTwitterアカウントに連絡をお願い致します。
 また、感想などを添えていただけると嬉しいです。
 
-cyross _at_ po _dot_ twin _dot_ ne _dot_ jp  
-http://d.hatena.ne.jp/cyross/  
-http://twitter.com/cyross  
+cyross _at_ po _dot_ twin _dot_ ne _dot_ jp
+http://d.hatena.ne.jp/cyross/
+http://twitter.com/cyross

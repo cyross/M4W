@@ -52,7 +52,7 @@
    * @param options.id audioタグに一位につけられるID
    * @param options.src 音声ファイルのURLを配列で指定(マルチブラウザ対応、ブラウザ内では指定したどれかを再生)
    * @param [options.bgm] BGMとして繰り返し再生可かどうかを指定(true:BGM/false:SE)
-   * @return 音声を再生できる状態に持ち込んでいるDeferredオブジェクト<br>コールバック関数の引数は、{type: "bgm"もしくは"se", id: options.id, value: 生成したSoundオブジェクト}で示すオブジェクト
+   * @return 音声を再生できる状態に持ち込んでいるDeferredオブジェクト<br>コールバック関数の引数は、{type: "bgm"もしくは"se", id: options.id, value: 生成したSoundオブジェクト. options: 生成時のオプション}で示すオブジェクト
    */
   Sound.load = function(options){
     var o = $.extend({
@@ -65,7 +65,7 @@
     $area.attr("id", o.id);
     $area.attr("preload", "auto");
     if(o.bgm == true){ $area.attr("loop", "true"); }
-    
+
     for(var i=0; i<o.src.length; i++){
       var $src = $("<source />");
       var url = o.src[i] + "?" + new Date().getTime();
@@ -80,7 +80,7 @@
       var d = defer;
       var snd_id = o.id;
       var type = (o.bgm==true ? "bgm" : "se");
-      return function(){ d.resolve({type: type, id: snd_id, value: new Sound(snd_id)}); };
+      return function(){ d.resolve({type: type, id: snd_id, value: new Sound(snd_id), options: options}); };
     }).bind(this)());
 
     this.tag = $area[0];

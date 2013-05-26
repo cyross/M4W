@@ -80,5 +80,15 @@
 ・サンプル0004を追加
 ・Screen.resizeメソッドのバグを修正
 
-2013/05/23
+2013/05/25
 ・jquery.m4w.thread.jsを削除
+
+2013/05/26
+・README.mdの謝辞の内容を修正
+・window.m4w.user_agentメソッドを追加
+・window.m4w.is_supported, window.m4w.is_smart_phoneメソッドを削除
+・各クラスのload(load_imageメソッド)の引数に生成時にoptionssプロパティを追加
+・SpriteExのコンストラクタの引数インタフェースの変更
+・サンプル0005を追加
+・サンプル0006を追加
+・ドキュメントの修正
