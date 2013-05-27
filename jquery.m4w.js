@@ -426,8 +426,7 @@
    * </ul>
    * また、以下の関数が利用可能
    * <ul>
-   * <li>is_supported</li>
-   * <li>is_smart_phone</li>
+   * <li>user_agent</li>
    * </ul>
    * また、以下のプロパティが利用可能
    * <ul>
@@ -545,7 +544,7 @@
     $canvas[0].width = cw;
     $canvas[0].height = ch;
     return $canvas;
-  }
+  };
 
   /**
    * jQueryオブジェクトの別名(http://jquery.com/)

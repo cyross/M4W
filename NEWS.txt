@@ -93,3 +93,8 @@
 ・サンプル0006を追加
 ・ドキュメントの修正
 ・SpriteExクラスコンストラクタの説明を修正
+
+2013/05/28
+・jquery.m4w.input.jsを追加
+・サンプル0003をjquery.m4w.input.js対応に変更
+・サンプル0004をjquery.m4w.input.js対応に変更

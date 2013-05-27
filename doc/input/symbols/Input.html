@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - window.m4w</title>
+		<title>JsDoc Reference - Input</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -189,25 +189,9 @@ ul.inheritsList
 <h2>Classes</h2>
 <ul class="classList">
 	
-	<li><a href="../symbols/%24.html">$</a></li>
-	
-	<li><a href="../symbols/%24.fn.html">$.fn</a></li>
-	
 	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
 	
-	<li><a href="../symbols/AssetsLoader.html">AssetsLoader</a></li>
-	
-	<li><a href="../symbols/M4W.html">M4W</a></li>
-	
-	<li><a href="../symbols/Screen.html">Screen</a></li>
-	
-	<li><a href="../symbols/ScreenRenderer.html">ScreenRenderer</a></li>
-	
-	<li><a href="../symbols/Sprite.html">Sprite</a></li>
-	
-	<li><a href="../symbols/SpriteRenderer.html">SpriteRenderer</a></li>
-	
-	<li><a href="../symbols/window.m4w.html">window.m4w</a></li>
+	<li><a href="../symbols/Input.html">Input</a></li>
 	
 </ul>
 <hr />
@@ -218,7 +202,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace window.m4w
+				Namespace Input
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -226,33 +210,16 @@ ul.inheritsList
 				
 				
 			
-				各種クラスの外部アクセス用名前空間<br>以下のクラスが利用可能
-<ul>
-<li>Screen</li>
-<li>AssetsLoader</li>
-<li>Sprite</li>
-<li>SpriteRenderer</li>
-<li>ScreenRenderer</li>
-</ul>
-また、以下の関数が利用可能
-<ul>
-<li>user_agent</li>
-</ul>
-また、以下のプロパティが利用可能
-<ul>
-<li>interval(画面の描画間隔、初期値は60(60fps相当)、ただし、間隔取得にsetTimeoutを使用するときのみ)</li>
-<li>vars(データ共有オブジェクト　初期は空のオブジェクト)</li>
-<li>input_vars(入力デバイス関連情報共有オブジェクト<br>初期は空のオブジェクト)</li>
-</ul>
+				各種クラスの外部アクセス用名前空間<br>以下の関数が利用可能<ul><li>can_touch</li><li>is_windows8</li><li>get_xy_mouse</li><li>get_xy_touch</li><li>get_xy_multitouch</li><li>get_xy</li></ul>また、以下のプロパティが利用可能<ul><li>vars(入力デバイス関連情報共有オブジェクト<br>初期は空のオブジェクト)</li></ul>
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/jquery.m4w.js.html">jquery.m4w.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/jquery.m4w.input.js.html">jquery.m4w.input.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class window.m4w.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Input.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -265,7 +232,7 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/window.m4w.html#constructor">window.m4w</a></b>
+								<b><a href="../symbols/Input.html#constructor">Input</a></b>
 							</div>
 							<div class="description"></div>
 						</td>
@@ -278,7 +245,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class window.m4w.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Input.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -292,7 +259,7 @@ ul.inheritsList
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								window.m4w.<b><a href="../symbols/window.m4w.html#.input_vars">input_vars</a></b>
+								Input.<b><a href="../symbols/Input.html#.get_xy">get_xy</a></b>
 								</div>
 								<div class="description"></div>
 							</td>
@@ -302,37 +269,7 @@ ul.inheritsList
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								window.m4w.<b><a href="../symbols/window.m4w.html#.interval">interval</a></b>
-								</div>
-								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								window.m4w.<b><a href="../symbols/window.m4w.html#.is_stop">is_stop</a></b>
-								</div>
-								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								window.m4w.<b><a href="../symbols/window.m4w.html#.rendering_id">rendering_id</a></b>
-								</div>
-								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								window.m4w.<b><a href="../symbols/window.m4w.html#.vars">vars</a></b>
+								Input.<b><a href="../symbols/Input.html#.vars">vars</a></b>
 								</div>
 								<div class="description"></div>
 							</td>
@@ -349,7 +286,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class window.m4w.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class Input.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -362,45 +299,45 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">window.m4w.<b><a href="../symbols/window.m4w.html#.create_canvas">create_canvas</a></b>()
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.can_touch">can_touch</a></b>()
 								</div>
-								<div class="description">Canvasタグを作成する</div>
+								<div class="description">User Agent から、タッチデバイスかどうか判別する<br>使用している端末・OSが以下の時、trueとなる<ul><li>イベントにontouchstartが用意されている<li>iPhone<li>iPad<li>iPod Touch<li>Android端末<li>Windows Phone<li>Windows 8(ディスプレイがタッチ対応かどうかにかかわらず)</ul></div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">window.m4w.<b><a href="../symbols/window.m4w.html#.main_logic">main_logic</a></b>()
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.get_xy_mouse">get_xy_mouse</a></b>(ev, ev)
 								</div>
-								<div class="description"></div>
+								<div class="description">現在のマウスポインタの位置を取得する<br>mousestart, mousemoveなどのイベントハンドリング時に使用する<br>$areaで示したブロック(jQueryオブジェクト)の左上を[0,0]とする</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">window.m4w.<b><a href="../symbols/window.m4w.html#.main_loop">main_loop</a></b>()
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.get_xy_multitouch">get_xy_multitouch</a></b>(ev, ex)
 								</div>
-								<div class="description">ゲームループ開始</div>
+								<div class="description">現在全ての指がタッチしている位置を取得する<br>touchstart, touchmoveなどのイベントハンドリング時に使用する<br>$areaで示したブロック(jQueryオブジェクト)の左上を[0,0]とする</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">window.m4w.<b><a href="../symbols/window.m4w.html#.stop_main_loop">stop_main_loop</a></b>()
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.get_xy_touch">get_xy_touch</a></b>(ev, ex)
 								</div>
-								<div class="description">ゲームループを停止する</div>
+								<div class="description">現在タッチしている位置を取得する<br>touchstart, touchmoveなどのイベントハンドリング時に使用する<br>$areaで示したブロック(jQueryオブジェクト)の左上を[0,0]とする</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">window.m4w.<b><a href="../symbols/window.m4w.html#.user_agent">user_agent</a></b>()
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.is_windows8">is_windows8</a></b>()
 								</div>
-								<div class="description"></div>
+								<div class="description">User Agent から、使用しているOSがWindows 8かどうか判別する<br></div>
 							</td>
 						</tr>
 					
@@ -421,7 +358,7 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>window.m4w</b>
+						<b>Input</b>
 				</div>
 				
 				<div class="description">
@@ -431,7 +368,7 @@ ul.inheritsList
 				
 				
 				
-				<pre class="code">var dw = new (window).m4w.Drawer({render: function(ctx){ ctx.beginPath(); ... }});</pre>
+				<pre class="code">if((window).m4w.Input.can_touch()){ ... }</pre>
 				
 				
 				
@@ -453,77 +390,11 @@ ul.inheritsList
 					Field Detail
 				</div>
 				
-					<a name=".input_vars"> </a>
+					<a name=".get_xy"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">window.m4w.</span><b>input_vars</b>
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".interval"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">window.m4w.</span><b>interval</b>
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".is_stop"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">window.m4w.</span><b>is_stop</b>
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".rendering_id"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">window.m4w.</span><b>rendering_id</b>
+					<span class="light">Input.</span><b>get_xy</b>
 					
 					</div>
 					<div class="description">
@@ -545,7 +416,7 @@ ul.inheritsList
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">window.m4w.</span><b>vars</b>
+					<span class="light">Input.</span><b>vars</b>
 					
 					</div>
 					<div class="description">
@@ -571,15 +442,47 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
-					<a name=".create_canvas"> </a>
+					<a name=".can_touch"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">window.m4w.</span><b>create_canvas</b>()
+					<span class="light">Input.</span><b>can_touch</b>()
 					
 					</div>
 					<div class="description">
-						Canvasタグを作成する
+						User Agent から、タッチデバイスかどうか判別する<br>使用している端末・OSが以下の時、trueとなる<ul><li>イベントにontouchstartが用意されている<li>iPhone<li>iPad<li>iPod Touch<li>Android端末<li>Windows Phone<li>Windows 8(ディスプレイがタッチ対応かどうかにかかわらず)</ul>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>タッチデバイスの時はtrue、それ以外はfalse</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".get_xy_mouse"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">Input.</span><b>get_xy_mouse</b>(ev, ev)
+					
+					</div>
+					<div class="description">
+						現在のマウスポインタの位置を取得する<br>mousestart, mousemoveなどのイベントハンドリング時に使用する<br>$areaで示したブロック(jQueryオブジェクト)の左上を[0,0]とする
 						
 						
 					</div>
@@ -591,58 +494,16 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>options.id</b>
+									<b>ev</b>
 									
 								</dt>
-								<dd>画面のID</dd>
+								<dd>取得に使用するイベントオブジェクト</dd>
 							
 								<dt>
-									<b>options.width</b>
-									<i>Optional</i>
+									<b>ev</b>
+									
 								</dt>
-								<dd>画面の横幅<br>ピクセル単位<br>省略時は640</dd>
-							
-								<dt>
-									<b>options.height</b>
-									<i>Optional</i>
-								</dt>
-								<dd>画面の高さ<br>ピクセル単位<br>省略時は480</dd>
-							
-								<dt>
-									<b>options.position</b>
-									<i>Optional</i>
-								</dt>
-								<dd>bodyからの位置関係(CSSのpositionと同じ)<br>省略時は"relative"</dd>
-							
-								<dt>
-									<b>options.left</b>
-									<i>Optional</i>
-								</dt>
-								<dd>ブラウザ(もしくは親ブロックからの右方向の位置<br>単位はピクセル<br>省略時は0(ブロックの左端)</dd>
-							
-								<dt>
-									<b>options.top</b>
-									<i>Optional</i>
-								</dt>
-								<dd>ブラウザ(もしくは親ブロックからの上方向の位置<br>単位はピクセル<br>省略時は0(ブロックの上端)</dd>
-							
-								<dt>
-									<b>options.content_width</b>
-									<i>Optional</i>
-								</dt>
-								<dd>描画領域の横幅<br>単位はピクセル<br>指定したときは、widthで指定した範囲まで拡大して表示される<br>省略時はwidthと同じ値</dd>
-							
-								<dt>
-									<b>options.content_height</b>
-									<i>Optional</i>
-								</dt>
-								<dd>描画領域の高さ<br>単位はピクセル<br>指定したときは、heightで指定したはんいまで拡大して表示される<br>省略時はheightと同じ値</dd>
-							
-								<dt>
-									<b>options.z</b>
-									<i>Optional</i>
-								</dt>
-								<dd>ブラウザ上の前後位置を指定する<br>省略時は0</dd>
+								<dd>取得に使用するイベントオブジェクト</dd>
 							
 							</dl>
 						
@@ -650,45 +511,27 @@ ul.inheritsList
 						
 						
 						
-						
-						
-
-					<hr />
-				
-					<a name=".main_logic"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">window.m4w.</span><b>main_logic</b>()
-					
-					</div>
-					<div class="description">
-						
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>[x,y]で示す配列</dd>
+							
+							</dl>
 						
 						
 						
 
 					<hr />
 				
-					<a name=".main_loop"> </a>
+					<a name=".get_xy_multitouch"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">window.m4w.</span><b>main_loop</b>()
+					<span class="light">Input.</span><b>get_xy_multitouch</b>(ev, ex)
 					
 					</div>
 					<div class="description">
-						ゲームループ開始
+						現在全ての指がタッチしている位置を取得する<br>touchstart, touchmoveなどのイベントハンドリング時に使用する<br>$areaで示したブロック(jQueryオブジェクト)の左上を[0,0]とする
 						
 						
 					</div>
@@ -696,24 +539,48 @@ ul.inheritsList
 					
 					
 						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>ev</b>
+									
+								</dt>
+								<dd>取得に使用するイベントオブジェクト</dd>
+							
+								<dt>
+									<b>ex</b>
+									
+								</dt>
+								<dd>取得に使用するイベントオブジェクト</dd>
+							
+							</dl>
 						
 						
 						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>[x,y]で示す配列の配列</dd>
+							
+							</dl>
 						
 						
 						
 
 					<hr />
 				
-					<a name=".stop_main_loop"> </a>
+					<a name=".get_xy_touch"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">window.m4w.</span><b>stop_main_loop</b>()
+					<span class="light">Input.</span><b>get_xy_touch</b>(ev, ex)
 					
 					</div>
 					<div class="description">
-						ゲームループを停止する
+						現在タッチしている位置を取得する<br>touchstart, touchmoveなどのイベントハンドリング時に使用する<br>$areaで示したブロック(jQueryオブジェクト)の左上を[0,0]とする
 						
 						
 					</div>
@@ -721,24 +588,48 @@ ul.inheritsList
 					
 					
 						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>ev</b>
+									
+								</dt>
+								<dd>取得に使用するイベントオブジェクト</dd>
+							
+								<dt>
+									<b>ex</b>
+									
+								</dt>
+								<dd>取得に使用するイベントオブジェクト</dd>
+							
+							</dl>
 						
 						
 						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>[x,y]で示す配列</dd>
+							
+							</dl>
 						
 						
 						
 
 					<hr />
 				
-					<a name=".user_agent"> </a>
+					<a name=".is_windows8"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">window.m4w.</span><b>user_agent</b>()
+					<span class="light">Input.</span><b>is_windows8</b>()
 					
 					</div>
 					<div class="description">
-						
+						User Agent から、使用しているOSがWindows 8かどうか判別する<br>
 						
 						
 					</div>
@@ -749,6 +640,13 @@ ul.inheritsList
 						
 						
 						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>Windows 8の時はtrue、それ以外はfalse</dd>
+							
+							</dl>
 						
 						
 						
@@ -767,7 +665,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue May 28 2013 02:18:20 GMT+0900 (JST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue May 28 2013 02:18:21 GMT+0900 (JST)
 		</div>
 	</body>
 </html>

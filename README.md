@@ -31,7 +31,7 @@ version 0.0.1
  * jquery.m4w.js M4W本体
  * jquery.m4w.sound.js M4Wを使用し、音声を扱うための拡張プラグイン
  * jquery.m4w.video.js M4Wを使用し、ビデオを再生するための拡張プラグイン
- * jquery.m4w.thread.js M4Wを使用し、スレッドを扱うための拡張プラグイン
+ * jquery.m4w.input.js M4Wを使用し、マウスカーソルの位置などの入力情報を扱うための拡張プラグイン
  * jquery.m4w.sprite_ex.js M4Wを使用し、強力なスプライトを扱うための拡張プラグイン
 
 # 最低限の前準備(よくある方法)：
@@ -167,6 +167,11 @@ version 0.0.1
 この場を借りて御礼申し上げます。
 
 http://kudox.jp/html-css/html5-canvas-animation
+
+本ソフトウェアのUA判別の一部は、うのらぼ。さんのブログ記事を参考に致しました。
+この場を借りて御礼申し上げます。
+
+http://unolabo.boo.jp/archives/2011/07/21-%E3%80%90iphoneandroid%E3%80%91%E3%82%BF%E3%83%83%E3%83%81%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%8B%E3%81%A9%E3%81%86%E3%81%8B%E5%88%A4%E5%AE%9A%E3%81%99%E3%82%8B.html
 
 サンプルに使用している画像の一部は、以下のボタン作成サイトを利用しています。
 

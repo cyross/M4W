@@ -433,159 +433,158 @@
 <span class='line'>426</span>    * &lt;/ul>
 <span class='line'>427</span>    * また、以下の関数が利用可能
 <span class='line'>428</span>    * &lt;ul>
-<span class='line'>429</span>    * &lt;li>is_supported&lt;/li>
-<span class='line'>430</span>    * &lt;li>is_smart_phone&lt;/li>
-<span class='line'>431</span>    * &lt;/ul>
-<span class='line'>432</span>    * また、以下のプロパティが利用可能
-<span class='line'>433</span>    * &lt;ul>
-<span class='line'>434</span>    * &lt;li>interval(画面の描画間隔、初期値は60(60fps相当)、ただし、間隔取得にsetTimeoutを使用するときのみ)&lt;/li>
-<span class='line'>435</span>    * &lt;li>vars(データ共有オブジェクト　初期は空のオブジェクト)&lt;/li>
-<span class='line'>436</span>    * &lt;li>input_vars(入力デバイス関連情報共有オブジェクト&lt;br>初期は空のオブジェクト)&lt;/li>
-<span class='line'>437</span>    * &lt;/ul>
-<span class='line'>438</span>    * @example var dw = new (window).m4w.Drawer({render: function(ctx){ ctx.beginPath(); ... }});
-<span class='line'>439</span>   */</span><span class="WHIT">
-<span class='line'>440</span> </span><span class="WHIT">  </span><span class="NAME">window.m4w</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>441</span> </span><span class="WHIT">    </span><span class="NAME">Screen</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">Screen</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>442</span> </span><span class="WHIT">    </span><span class="NAME">AssetsLoader</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">AssetsLoader</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>443</span> </span><span class="WHIT">    </span><span class="NAME">Sprite</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">Sprite</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>444</span> </span><span class="WHIT">    </span><span class="NAME">SpriteRenderer</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">SpriteRenderer</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>445</span> </span><span class="WHIT">    </span><span class="NAME">ScreenRenderer</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">ScreenRenderer</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>446</span> </span><span class="WHIT">    </span><span class="COMM">/**
-<span class='line'>447</span>      * @property ユーザーエージェントを返す関数&lt;br>
-<span class='line'>448</span>      * 返されるオブジェクトは、user_agent, versionの2つのプロパティを持つ&lt;br>
-<span class='line'>449</span>      */</span><span class="WHIT">
-<span class='line'>450</span> </span><span class="WHIT">    </span><span class="NAME">user_agent</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>451</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">result</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>452</span> </span><span class="WHIT">        </span><span class="NAME">result.user_agent</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.navigator.userAgent.toLowerCase</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>453</span> </span><span class="WHIT">        </span><span class="NAME">result.version</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.navigator.appVersion.toLowerCase</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>454</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">result</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>455</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>456</span> </span><span class="WHIT">    </span><span class="COMM">/**
-<span class='line'>457</span>      * @property 画面更新間隔(初期値:60(fps))
-<span class='line'>458</span>      */</span><span class="WHIT">
-<span class='line'>459</span> </span><span class="WHIT">    </span><span class="NAME">interval</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">60</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>460</span> </span><span class="WHIT">    </span><span class="COMM">/**
-<span class='line'>461</span>      * @property 画面更新ID(内部で使用)
-<span class='line'>462</span>      */</span><span class="WHIT">
-<span class='line'>463</span> </span><span class="WHIT">    </span><span class="NAME">rendering_id</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>464</span> </span><span class="WHIT">    </span><span class="COMM">/**
-<span class='line'>465</span>      * @property 画面更新終了フラグ(内部で使用)
-<span class='line'>466</span>      */</span><span class="WHIT">
-<span class='line'>467</span> </span><span class="WHIT">    </span><span class="NAME">is_stop</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>468</span> </span><span class="WHIT">    </span><span class="COMM">/**
-<span class='line'>469</span>      * @property ゲームロジック
-<span class='line'>470</span>      */</span><span class="WHIT">
-<span class='line'>471</span> </span><span class="WHIT">    </span><span class="NAME">main_logic</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>472</span> </span><span class="WHIT">    </span><span class="COMM">/**
-<span class='line'>473</span>      * @property データ共有オブジェクト&lt;br>初期は空のオブジェクト
-<span class='line'>474</span>      */</span><span class="WHIT">
-<span class='line'>475</span> </span><span class="WHIT">    </span><span class="NAME">vars</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>476</span> </span><span class="WHIT">    </span><span class="COMM">/**
-<span class='line'>477</span>      * @property 入力デバイス関連情報共有オブジェクト&lt;br>初期は空のオブジェクト
-<span class='line'>478</span>      */</span><span class="WHIT">
-<span class='line'>479</span> </span><span class="WHIT">    </span><span class="NAME">input_vars</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>480</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>481</span> 
-<span class='line'>482</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'>483</span>    * ゲームループ内部ロジック
-<span class='line'>484</span>    */</span><span class="WHIT">
-<span class='line'>485</span> </span><span class="WHIT">  </span><span class="NAME">window.m4w._game_loop</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>486</span> </span><span class="WHIT">    </span><span class="COMM">// メインロジック実行</span><span class="WHIT">
-<span class='line'>487</span> </span><span class="WHIT">    </span><span class="NAME">window.m4w.main_logic</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>488</span> </span><span class="WHIT">    </span><span class="COMM">// 外部から停止リクエストが来たときは終了</span><span class="WHIT">
-<span class='line'>489</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">window.m4w.is_stop</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>490</span> </span><span class="WHIT">      </span><span class="NAME">window.cancelAnimFrame</span><span class="PUNC">(</span><span class="NAME">window.m4w.rendering_id</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>491</span> </span><span class="WHIT">      </span><span class="NAME">window.m4w.is_stop</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>492</span> </span><span class="WHIT">      </span><span class="KEYW">return</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>493</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>494</span> </span><span class="WHIT">    </span><span class="COMM">// 画面描画</span><span class="WHIT">
-<span class='line'>495</span> </span><span class="WHIT">    </span><span class="NAME">window.m4w.screen.render</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>496</span> </span><span class="WHIT">    </span><span class="COMM">// 次のループ実行を設定</span><span class="WHIT">
-<span class='line'>497</span> </span><span class="WHIT">    </span><span class="NAME">window.m4w.rendering_id</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.requestAnimFrame</span><span class="PUNC">(</span><span class="NAME">window.m4w._game_loop.bind</span><span class="PUNC">(</span><span class="NAME">window.m4w</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>498</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>499</span> 
-<span class='line'>500</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'>501</span>    * ゲームループ開始
-<span class='line'>502</span>    */</span><span class="WHIT">
-<span class='line'>503</span> </span><span class="WHIT">  </span><span class="NAME">window.m4w.main_loop</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>504</span> </span><span class="WHIT">    </span><span class="NAME">window.m4w.rendering_id</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.requestAnimFrame</span><span class="PUNC">(</span><span class="NAME">window.m4w._game_loop.bind</span><span class="PUNC">(</span><span class="NAME">window.m4w</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>505</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>506</span> 
-<span class='line'>507</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'>508</span>    * ゲームループを停止する
-<span class='line'>509</span>    */</span><span class="WHIT">
-<span class='line'>510</span> </span><span class="WHIT">  </span><span class="NAME">window.m4w.stop_main_loop</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>511</span> </span><span class="WHIT">    </span><span class="NAME">window.m4w.is_stop</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>512</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>513</span> 
-<span class='line'>514</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'>515</span>    * Canvasタグを作成する
-<span class='line'>516</span>    * @param options.id 画面のID
-<span class='line'>517</span>    * @param [options.width] 画面の横幅&lt;br>ピクセル単位&lt;br>省略時は640
-<span class='line'>518</span>    * @param [options.height] 画面の高さ&lt;br>ピクセル単位&lt;br>省略時は480
-<span class='line'>519</span>    * @param [options.position] bodyからの位置関係(CSSのpositionと同じ)&lt;br>省略時は"relative"
-<span class='line'>520</span>    * @param [options.left] ブラウザ(もしくは親ブロックからの右方向の位置&lt;br>単位はピクセル&lt;br>省略時は0(ブロックの左端)
-<span class='line'>521</span>    * @param [options.top] ブラウザ(もしくは親ブロックからの上方向の位置&lt;br>単位はピクセル&lt;br>省略時は0(ブロックの上端)
-<span class='line'>522</span>    * @param [options.content_width] 描画領域の横幅&lt;br>単位はピクセル&lt;br>指定したときは、widthで指定した範囲まで拡大して表示される&lt;br>省略時はwidthと同じ値
-<span class='line'>523</span>    * @param [options.content_height] 描画領域の高さ&lt;br>単位はピクセル&lt;br>指定したときは、heightで指定したはんいまで拡大して表示される&lt;br>省略時はheightと同じ値
-<span class='line'>524</span>    * @param [options.z] ブラウザ上の前後位置を指定する&lt;br>省略時は0
-<span class='line'>525</span>    */</span><span class="WHIT">
-<span class='line'>526</span> </span><span class="WHIT">  </span><span class="NAME">window.m4w.create_canvas</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>527</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">o</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$.extend</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>528</span> </span><span class="WHIT">      </span><span class="NAME">width</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">640</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>529</span> </span><span class="WHIT">      </span><span class="NAME">height</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">480</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>530</span> </span><span class="WHIT">      </span><span class="NAME">position</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">"relative"</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>531</span> </span><span class="WHIT">      </span><span class="NAME">left</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>532</span> </span><span class="WHIT">      </span><span class="NAME">top</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>533</span> </span><span class="WHIT">      </span><span class="NAME">z</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="WHIT">
-<span class='line'>534</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>535</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">$canvas</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'&lt;canvas />'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="NAME">width</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">o.width</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">height</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">o.height</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>536</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">cw</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">o.width</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>537</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">ch</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">o.height</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>538</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="STRN">"content_width"</span><span class="WHIT"> </span><span class="KEYW">in</span><span class="WHIT"> </span><span class="NAME">o</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT"> </span><span class="NAME">cw</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">o.content_width</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>539</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="STRN">"content_height"</span><span class="WHIT"> </span><span class="KEYW">in</span><span class="WHIT"> </span><span class="NAME">o</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT"> </span><span class="NAME">ch</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">o.content_height</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>540</span> </span><span class="WHIT">    </span><span class="NAME">$canvas.attr</span><span class="PUNC">(</span><span class="STRN">"id"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">o.id</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>541</span> </span><span class="WHIT">    </span><span class="NAME">$canvas.css</span><span class="PUNC">(</span><span class="STRN">"position"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">o.position</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>542</span> </span><span class="WHIT">    </span><span class="NAME">$canvas.css</span><span class="PUNC">(</span><span class="STRN">"left"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">o.left</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>543</span> </span><span class="WHIT">    </span><span class="NAME">$canvas.css</span><span class="PUNC">(</span><span class="STRN">"top"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">o.top</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>544</span> </span><span class="WHIT">    </span><span class="NAME">$canvas.css</span><span class="PUNC">(</span><span class="STRN">"z-index"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">o.z</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>545</span> </span><span class="WHIT">    </span><span class="NAME">$canvas</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">width</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">cw</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>546</span> </span><span class="WHIT">    </span><span class="NAME">$canvas</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">height</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">ch</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>547</span> </span><span class="WHIT">    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">$canvas</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>548</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>549</span> 
-<span class='line'>550</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'>551</span>    * jQueryオブジェクトの別名(http://jquery.com/)
-<span class='line'>552</span>    * @name $
-<span class='line'>553</span>    * @class
-<span class='line'>554</span>    */</span><span class="WHIT">
-<span class='line'>555</span> 
-<span class='line'>556</span> </span><span class="WHIT">  </span><span class="COMM">/**
-<span class='line'>557</span>    * jQueryオブジェクトのプラグイン関数(http://jquery.com/)
-<span class='line'>558</span>    * @name $.fn
-<span class='line'>559</span>    * @class
-<span class='line'>560</span>    */</span><span class="WHIT">
-<span class='line'>561</span> 
-<span class='line'>562</span> </span><span class="WHIT">   </span><span class="COMM">/**
-<span class='line'>563</span>    * 指定したブロックのm4w初期化
-<span class='line'>564</span>    * このメソッドを呼び出すと、以下の場所にオブジェクトが追加される
-<span class='line'>565</span>    * &lt;table>
-<span class='line'>566</span>    * &lt;tr>&lt;th>対象&lt;/th>&lt;th>名称&lt;/th>&lt;th>オブジェクト&lt;/th>&lt;/tr>
-<span class='line'>567</span>    * &lt;tr>&lt;td>jQueryオブジェクト&lt;/td>&lt;td>m4w&lt;/td>&lt;td>M4W&lt;/td>&lt;/tr>
-<span class='line'>568</span>    * &lt;tr>&lt;td>各ブロック要素のDOMオブジェクト&lt;/td>&lt;td>m4w&lt;/td>&lt;td>M4WDOM&lt;/td>&lt;/tr>
-<span class='line'>569</span>    * &lt;/table>
-<span class='line'>570</span>    * @param [options.screen_options] screenオブジェクトに渡す引数&lt;br>Screenコンストラクタの引数と同じ
-<span class='line'>571</span>    * @param [options.assets] 初期化時に作成したいアセットの配列。内容はAssetLoader.loadメソッドの引数と同じ&lt;br>省略時はnull
-<span class='line'>572</span>    */</span><span class="WHIT">
-<span class='line'>573</span> </span><span class="WHIT">  </span><span class="NAME">$.fn.m4w</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>574</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">o</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$.extend</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>575</span> </span><span class="WHIT">      </span><span class="NAME">screen_options</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>576</span> </span><span class="WHIT">      </span><span class="NAME">assets</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>577</span> </span><span class="WHIT">      </span><span class="NAME">body</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="WHIT">
-<span class='line'>578</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>579</span> 
-<span class='line'>580</span> </span><span class="WHIT">    </span><span class="NAME">$.extend</span><span class="PUNC">(</span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">m4w</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">M4W</span><span class="PUNC">(</span><span class="NAME">o</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>581</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">o.assets</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT"> </span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">m4w.add_assets</span><span class="PUNC">(</span><span class="NAME">o.assets</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>582</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>583</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="NAME">jQuery</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>584</span> </span></pre></body></html>
+<span class='line'>429</span>    * &lt;li>user_agent&lt;/li>
+<span class='line'>430</span>    * &lt;/ul>
+<span class='line'>431</span>    * また、以下のプロパティが利用可能
+<span class='line'>432</span>    * &lt;ul>
+<span class='line'>433</span>    * &lt;li>interval(画面の描画間隔、初期値は60(60fps相当)、ただし、間隔取得にsetTimeoutを使用するときのみ)&lt;/li>
+<span class='line'>434</span>    * &lt;li>vars(データ共有オブジェクト　初期は空のオブジェクト)&lt;/li>
+<span class='line'>435</span>    * &lt;li>input_vars(入力デバイス関連情報共有オブジェクト&lt;br>初期は空のオブジェクト)&lt;/li>
+<span class='line'>436</span>    * &lt;/ul>
+<span class='line'>437</span>    * @example var dw = new (window).m4w.Drawer({render: function(ctx){ ctx.beginPath(); ... }});
+<span class='line'>438</span>   */</span><span class="WHIT">
+<span class='line'>439</span> </span><span class="WHIT">  </span><span class="NAME">window.m4w</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>440</span> </span><span class="WHIT">    </span><span class="NAME">Screen</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">Screen</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>441</span> </span><span class="WHIT">    </span><span class="NAME">AssetsLoader</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">AssetsLoader</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>442</span> </span><span class="WHIT">    </span><span class="NAME">Sprite</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">Sprite</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>443</span> </span><span class="WHIT">    </span><span class="NAME">SpriteRenderer</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">SpriteRenderer</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>444</span> </span><span class="WHIT">    </span><span class="NAME">ScreenRenderer</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">ScreenRenderer</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>445</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>446</span>      * @property ユーザーエージェントを返す関数&lt;br>
+<span class='line'>447</span>      * 返されるオブジェクトは、user_agent, versionの2つのプロパティを持つ&lt;br>
+<span class='line'>448</span>      */</span><span class="WHIT">
+<span class='line'>449</span> </span><span class="WHIT">    </span><span class="NAME">user_agent</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>450</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">result</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>451</span> </span><span class="WHIT">        </span><span class="NAME">result.user_agent</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.navigator.userAgent.toLowerCase</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>452</span> </span><span class="WHIT">        </span><span class="NAME">result.version</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.navigator.appVersion.toLowerCase</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>453</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">result</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>454</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>455</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>456</span>      * @property 画面更新間隔(初期値:60(fps))
+<span class='line'>457</span>      */</span><span class="WHIT">
+<span class='line'>458</span> </span><span class="WHIT">    </span><span class="NAME">interval</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">60</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>459</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>460</span>      * @property 画面更新ID(内部で使用)
+<span class='line'>461</span>      */</span><span class="WHIT">
+<span class='line'>462</span> </span><span class="WHIT">    </span><span class="NAME">rendering_id</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>463</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>464</span>      * @property 画面更新終了フラグ(内部で使用)
+<span class='line'>465</span>      */</span><span class="WHIT">
+<span class='line'>466</span> </span><span class="WHIT">    </span><span class="NAME">is_stop</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>467</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>468</span>      * @property ゲームロジック
+<span class='line'>469</span>      */</span><span class="WHIT">
+<span class='line'>470</span> </span><span class="WHIT">    </span><span class="NAME">main_logic</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>471</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>472</span>      * @property データ共有オブジェクト&lt;br>初期は空のオブジェクト
+<span class='line'>473</span>      */</span><span class="WHIT">
+<span class='line'>474</span> </span><span class="WHIT">    </span><span class="NAME">vars</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>475</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>476</span>      * @property 入力デバイス関連情報共有オブジェクト&lt;br>初期は空のオブジェクト
+<span class='line'>477</span>      */</span><span class="WHIT">
+<span class='line'>478</span> </span><span class="WHIT">    </span><span class="NAME">input_vars</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>479</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>480</span> 
+<span class='line'>481</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>482</span>    * ゲームループ内部ロジック
+<span class='line'>483</span>    */</span><span class="WHIT">
+<span class='line'>484</span> </span><span class="WHIT">  </span><span class="NAME">window.m4w._game_loop</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>485</span> </span><span class="WHIT">    </span><span class="COMM">// メインロジック実行</span><span class="WHIT">
+<span class='line'>486</span> </span><span class="WHIT">    </span><span class="NAME">window.m4w.main_logic</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>487</span> </span><span class="WHIT">    </span><span class="COMM">// 外部から停止リクエストが来たときは終了</span><span class="WHIT">
+<span class='line'>488</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">window.m4w.is_stop</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>489</span> </span><span class="WHIT">      </span><span class="NAME">window.cancelAnimFrame</span><span class="PUNC">(</span><span class="NAME">window.m4w.rendering_id</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>490</span> </span><span class="WHIT">      </span><span class="NAME">window.m4w.is_stop</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>491</span> </span><span class="WHIT">      </span><span class="KEYW">return</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>492</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>493</span> </span><span class="WHIT">    </span><span class="COMM">// 画面描画</span><span class="WHIT">
+<span class='line'>494</span> </span><span class="WHIT">    </span><span class="NAME">window.m4w.screen.render</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>495</span> </span><span class="WHIT">    </span><span class="COMM">// 次のループ実行を設定</span><span class="WHIT">
+<span class='line'>496</span> </span><span class="WHIT">    </span><span class="NAME">window.m4w.rendering_id</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.requestAnimFrame</span><span class="PUNC">(</span><span class="NAME">window.m4w._game_loop.bind</span><span class="PUNC">(</span><span class="NAME">window.m4w</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>497</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>498</span> 
+<span class='line'>499</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>500</span>    * ゲームループ開始
+<span class='line'>501</span>    */</span><span class="WHIT">
+<span class='line'>502</span> </span><span class="WHIT">  </span><span class="NAME">window.m4w.main_loop</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>503</span> </span><span class="WHIT">    </span><span class="NAME">window.m4w.rendering_id</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.requestAnimFrame</span><span class="PUNC">(</span><span class="NAME">window.m4w._game_loop.bind</span><span class="PUNC">(</span><span class="NAME">window.m4w</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>504</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>505</span> 
+<span class='line'>506</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>507</span>    * ゲームループを停止する
+<span class='line'>508</span>    */</span><span class="WHIT">
+<span class='line'>509</span> </span><span class="WHIT">  </span><span class="NAME">window.m4w.stop_main_loop</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>510</span> </span><span class="WHIT">    </span><span class="NAME">window.m4w.is_stop</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>511</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>512</span> 
+<span class='line'>513</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>514</span>    * Canvasタグを作成する
+<span class='line'>515</span>    * @param options.id 画面のID
+<span class='line'>516</span>    * @param [options.width] 画面の横幅&lt;br>ピクセル単位&lt;br>省略時は640
+<span class='line'>517</span>    * @param [options.height] 画面の高さ&lt;br>ピクセル単位&lt;br>省略時は480
+<span class='line'>518</span>    * @param [options.position] bodyからの位置関係(CSSのpositionと同じ)&lt;br>省略時は"relative"
+<span class='line'>519</span>    * @param [options.left] ブラウザ(もしくは親ブロックからの右方向の位置&lt;br>単位はピクセル&lt;br>省略時は0(ブロックの左端)
+<span class='line'>520</span>    * @param [options.top] ブラウザ(もしくは親ブロックからの上方向の位置&lt;br>単位はピクセル&lt;br>省略時は0(ブロックの上端)
+<span class='line'>521</span>    * @param [options.content_width] 描画領域の横幅&lt;br>単位はピクセル&lt;br>指定したときは、widthで指定した範囲まで拡大して表示される&lt;br>省略時はwidthと同じ値
+<span class='line'>522</span>    * @param [options.content_height] 描画領域の高さ&lt;br>単位はピクセル&lt;br>指定したときは、heightで指定したはんいまで拡大して表示される&lt;br>省略時はheightと同じ値
+<span class='line'>523</span>    * @param [options.z] ブラウザ上の前後位置を指定する&lt;br>省略時は0
+<span class='line'>524</span>    */</span><span class="WHIT">
+<span class='line'>525</span> </span><span class="WHIT">  </span><span class="NAME">window.m4w.create_canvas</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>526</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">o</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$.extend</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>527</span> </span><span class="WHIT">      </span><span class="NAME">width</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">640</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>528</span> </span><span class="WHIT">      </span><span class="NAME">height</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">480</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>529</span> </span><span class="WHIT">      </span><span class="NAME">position</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">"relative"</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>530</span> </span><span class="WHIT">      </span><span class="NAME">left</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>531</span> </span><span class="WHIT">      </span><span class="NAME">top</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>532</span> </span><span class="WHIT">      </span><span class="NAME">z</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="WHIT">
+<span class='line'>533</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>534</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">$canvas</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'&lt;canvas />'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="NAME">width</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">o.width</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">height</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">o.height</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>535</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">cw</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">o.width</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>536</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">ch</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">o.height</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>537</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="STRN">"content_width"</span><span class="WHIT"> </span><span class="KEYW">in</span><span class="WHIT"> </span><span class="NAME">o</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT"> </span><span class="NAME">cw</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">o.content_width</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>538</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="STRN">"content_height"</span><span class="WHIT"> </span><span class="KEYW">in</span><span class="WHIT"> </span><span class="NAME">o</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT"> </span><span class="NAME">ch</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">o.content_height</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>539</span> </span><span class="WHIT">    </span><span class="NAME">$canvas.attr</span><span class="PUNC">(</span><span class="STRN">"id"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">o.id</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>540</span> </span><span class="WHIT">    </span><span class="NAME">$canvas.css</span><span class="PUNC">(</span><span class="STRN">"position"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">o.position</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>541</span> </span><span class="WHIT">    </span><span class="NAME">$canvas.css</span><span class="PUNC">(</span><span class="STRN">"left"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">o.left</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>542</span> </span><span class="WHIT">    </span><span class="NAME">$canvas.css</span><span class="PUNC">(</span><span class="STRN">"top"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">o.top</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>543</span> </span><span class="WHIT">    </span><span class="NAME">$canvas.css</span><span class="PUNC">(</span><span class="STRN">"z-index"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">o.z</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>544</span> </span><span class="WHIT">    </span><span class="NAME">$canvas</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">width</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">cw</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>545</span> </span><span class="WHIT">    </span><span class="NAME">$canvas</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">height</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">ch</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>546</span> </span><span class="WHIT">    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">$canvas</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>547</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>548</span> 
+<span class='line'>549</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>550</span>    * jQueryオブジェクトの別名(http://jquery.com/)
+<span class='line'>551</span>    * @name $
+<span class='line'>552</span>    * @class
+<span class='line'>553</span>    */</span><span class="WHIT">
+<span class='line'>554</span> 
+<span class='line'>555</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>556</span>    * jQueryオブジェクトのプラグイン関数(http://jquery.com/)
+<span class='line'>557</span>    * @name $.fn
+<span class='line'>558</span>    * @class
+<span class='line'>559</span>    */</span><span class="WHIT">
+<span class='line'>560</span> 
+<span class='line'>561</span> </span><span class="WHIT">   </span><span class="COMM">/**
+<span class='line'>562</span>    * 指定したブロックのm4w初期化
+<span class='line'>563</span>    * このメソッドを呼び出すと、以下の場所にオブジェクトが追加される
+<span class='line'>564</span>    * &lt;table>
+<span class='line'>565</span>    * &lt;tr>&lt;th>対象&lt;/th>&lt;th>名称&lt;/th>&lt;th>オブジェクト&lt;/th>&lt;/tr>
+<span class='line'>566</span>    * &lt;tr>&lt;td>jQueryオブジェクト&lt;/td>&lt;td>m4w&lt;/td>&lt;td>M4W&lt;/td>&lt;/tr>
+<span class='line'>567</span>    * &lt;tr>&lt;td>各ブロック要素のDOMオブジェクト&lt;/td>&lt;td>m4w&lt;/td>&lt;td>M4WDOM&lt;/td>&lt;/tr>
+<span class='line'>568</span>    * &lt;/table>
+<span class='line'>569</span>    * @param [options.screen_options] screenオブジェクトに渡す引数&lt;br>Screenコンストラクタの引数と同じ
+<span class='line'>570</span>    * @param [options.assets] 初期化時に作成したいアセットの配列。内容はAssetLoader.loadメソッドの引数と同じ&lt;br>省略時はnull
+<span class='line'>571</span>    */</span><span class="WHIT">
+<span class='line'>572</span> </span><span class="WHIT">  </span><span class="NAME">$.fn.m4w</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>573</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">o</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$.extend</span><span class="PUNC">(</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>574</span> </span><span class="WHIT">      </span><span class="NAME">screen_options</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>575</span> </span><span class="WHIT">      </span><span class="NAME">assets</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>576</span> </span><span class="WHIT">      </span><span class="NAME">body</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>577</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">options</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>578</span> 
+<span class='line'>579</span> </span><span class="WHIT">    </span><span class="NAME">$.extend</span><span class="PUNC">(</span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">m4w</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">M4W</span><span class="PUNC">(</span><span class="NAME">o</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>580</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">o.assets</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT"> </span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">m4w.add_assets</span><span class="PUNC">(</span><span class="NAME">o.assets</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>581</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>582</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="NAME">jQuery</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>583</span> </span></pre></body></html>

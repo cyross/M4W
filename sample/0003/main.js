@@ -9,16 +9,26 @@ $(document).ready(function(){
       // 今回は何もしない
     };
 
+    // スプライトの大きさ
+    var img_w = assets.sprite.s01.image.width;
+    var img_h = assets.sprite.s01.image.height;
+
     // 座標の更新
     var update_pos = function(e){
-      var offset = this.offset();
-      var x = e.pageX - offset.left;
-      var y = e.pageY - offset.top;
+
+      e.preventDefault();
+
+      var pos = window.m4w.Input.get_xy(this, e);
+      var l = img_w / 2;
+      var t = img_h / 2;
+      var x = pos[0] - l;
+      var y = pos[1] - t;
       var w = 640 - window.m4w.screen.sprites[0].image.width;
       var h = 480 - window.m4w.screen.sprites[0].image.height;
-      
+
       // 画像がはみ出ないように調整
-      // 今回、x,yが0以下の時は考慮する必要はない
+      if(x < l){ x = 0; }
+      if(y < t){ y = 0; }
       if(x > w){ x = w; }
       if(y > h){ y = h; }
       window.m4w.input_vars.gameX = x;
@@ -31,14 +41,14 @@ $(document).ready(function(){
         x:window.m4w.input_vars.gameX,
         y:window.m4w.input_vars.gameY
       });
-    }
+    };
 
     window.m4w.screen.sprites[0] = assets.sprite.s01; // わざとインデックスを付けて登録
     window.m4w.main_logic = main_logic;
     window.m4w.input_vars.pushed = false;
 
     // マウスのボタンを押した時、移動を開始
-    $area.on("mousedown", function(e){
+    $area.on("mousedown touchstart", function(e){
       e.preventDefault();
 
       // 右ボタンを押したときは対象外
@@ -61,7 +71,7 @@ $(document).ready(function(){
     }.bind($area));
 
     // マウスカーソルが動いた時、位置を更新
-    $area.on("mousemove", function(e){
+    $area.on("mousemove touchmove", function(e){
       // ボタンを押していないときは何もしない
       if(!window.m4w.input_vars.pushed){ return; }
 
@@ -76,7 +86,7 @@ $(document).ready(function(){
 
     // マウスボタンを離した時と
     //、マウスカーソルが外に出た時は移動させない
-    $area.on("mouseup mouseout",   function(e){
+    $area.on("mouseup mouseout touchend",   function(e){
       // ボタンを押していないときは何もしない
       if(!window.m4w.input_vars.pushed){ return; }
 
@@ -93,7 +103,7 @@ $(document).ready(function(){
       update_sprite(e);
 
     }.bind($area));
-  }
+  };
 
   // M4Wの初期化
   var body = $("#game");
@@ -107,7 +117,7 @@ $(document).ready(function(){
     ],
     success: on_ready
   });
-  
+
   // メインループの開始
   window.m4w.main_loop();
 });

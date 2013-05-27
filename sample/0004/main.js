@@ -9,22 +9,22 @@
   Cell = function(){
     this.state = 0; // 生死状態
     this.generation = 0; // 世代
-  }
-  
+  };
+
   Cell.prototype.birth = function(){
     this.state = 1; // 生きている
     this.generation = 0; // 世代はゼロ
-  }
+  };
 
   Cell.prototype.proceed = function(){
     this.state = 1; // 死んでいる
     this.generation = 1; // 世代を増やす
-  }
+  };
 
   Cell.prototype.death = function(){
     this.state = 0; // 死んでいる
     this.generation = 0; // 世代を戻す
-  }
+  };
 
   // 最初に生きさせる格子の数
   var live_cells = 800;
@@ -43,7 +43,7 @@
     top: 0,
     width: $(window).width(),
     height: $(window).height()
-  }
+  };
 
   // 格子の数
   var mwidth = base.width / matrix_width;
@@ -163,10 +163,12 @@
       };
 
       // クリックした箇所のセルの生死を反転
-      $area.off('click');
-      $area.on('click', function(event){
-        var x = parseInt(event.pageX / matrix_width);
-        var y = parseInt(event.pageY / matrix_height);
+      var event_name = (window.m4w.Input.can_touch ? 'touchstart' : 'click');
+      $area.on(event_name, function(event){
+        event.preventDefault();
+        var pos = window.m4w.Input.get_xy($area, event);
+        var x = parseInt(pos[0] / matrix_width);
+        var y = parseInt(pos[1] / matrix_height);
         var m = matrix[y][x];
         if(m.state == 0){
           m.birth();
@@ -184,20 +186,20 @@
 
       // セットアップ
       setup(matrix);
-  
+
       // 画面サイズが変わったときの処理
       $(window).off('resize');
       $(window).on('resize', function(event){
         reset($(window).width(), $(window).height(), dw, live_cells);
       });
-    
+
       // メインループの開始
       window.m4w.main_loop();
     };
 
     // M4Wの初期化
     $area.m4w({screen_options: base});
-  
+
     // アセットのロード
     AssetsLoader.load({
       assets: [
