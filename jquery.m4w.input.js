@@ -34,7 +34,12 @@
     /**
      * @property 入力デバイス関連情報共有オブジェクト<br>初期は空のオブジェクト
      */
-    vars: {}
+    vars: {},
+    start_events: {touch: "touchstart", mouse: "mousedown"},
+    move_events: {touch: "touchmove", mouse: "mousemove"},
+    end_events: {touch: "touchend", mouse: "mouseup"},
+    click_events: {touch: "touchstart", mouse: "click"},
+    event_mode: "mouse"
   };
 
   /**
@@ -122,9 +127,60 @@
   };
 
   /**
-   * @property Windows 8以外のタッチデバイスの時はget_xy_touchを、それ以外はget_xy_mouseを使用する
+   * イベントモードを切り替える<br>
+   * タッチ対応かマウス対応可を選択<br>
+   * 初期値は”mouse”<br>
+   * @param mode イベントモード<br>"touch"か"mouse”のみ指定可能<br>その他はfalseが返る
+   * @return mode引数が正しければtrue、正しくなければfalse
    */
-  Input.get_xy = ((Input.can_touch() && !(Input.is_windows8())) ? Input.get_xy_touch : Input.get_xy_mouse);
+  Input.set_event_mode = function(mode){
+    if(!mode in Input.start_events){ return false; }
+    Input.event_mode = mode;
+    if(mode == "touch"){
+      Input.get_xy = Input.get_xy_touch;
+    }
+    else{
+      Input.get_xy = Input.get_xy_mouse;
+    }
+    return true;
+  }
+
+  /**
+   * クリックイベント名を取得<br>
+   * @return mouseのときは"click"、touchのときは"touchstart"
+   */
+  Input.click_event_name = function(){
+    return Input.click_events[Input.event_mode];
+  }
+
+  /**
+   * 開始イベント名を取得<br>
+   * @return mouseのときは"mousestart"、touchのときは"touchstart"
+   */
+  Input.start_event_name = function(){
+    return Input.start_events[Input.event_mode];
+  }
+
+  /**
+   * 移動中イベント名を取得<br>
+   * @return mouseのときは"mousemove"、touchのときは"touchmove"
+   */
+  Input.move_event_name = function(){
+    return Input.move_events[Input.event_mode];
+  }
+
+  /**
+   * 終了イベント名を取得<br>
+   * @return mouseのときは"mouseend"、touchのときは"touchend"
+   */
+  Input.end_event_name = function(){
+    return Input.end_events[Input.event_mode];
+  }
+
+  /**
+   * @property event_modeによって、get_xy_touch、get_xy_mouseを切り替える
+   */
+  Input.get_xy = Input.get_xy_mouse;
 
   window.m4w = $.extend({Input: Input}, window.m4w);
 })(jQuery);

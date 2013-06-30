@@ -144,16 +144,14 @@ $(document).ready(function(){
     var tmp_pos = [0,0];
     var can_touch = window.m4w.Input.can_touch() && !(Input.is_windows8());
     var $area = $("#game");
-    start_event = (can_touch ? "touchstart" : "mousedown");
-    move_event = (can_touch ? "touchmove" : "mousemove");
-    end_event = (can_touch ? "touchend" : "mouseup");
-    $area.on(start_event, function(ev){
+    if(can_touch){ Input.set_event_mode("touch"); }
+    $area.on(Input.start_event_name(), function(ev){
       tmp_pos = window.m4w.Input.get_xy($area, ev);
     });
-    $area.on(move_event, function(ev){
+    $area.on(Input.move_event_name(), function(ev){
       tmp_pos = window.m4w.Input.get_xy($area, ev);
     });
-    $area.on(end_event, function(ev){
+    $area.on(Input.end_event_name(), function(ev){
       touch_pos = tmp_pos;
     });
 

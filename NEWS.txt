@@ -111,3 +111,6 @@
 ・ちょっとしたパフォーマンスアップの施策
 ・サンプル0007をちょこっとパフォーマンスアップ
 ・サンプルのjQueryを2.0.0から2.0.2に変更
+・Input.set_event_mode, Input.click_event_name, Input.start_event_name, Input.move_event_name, Input.end_event_nameメソッドを追加
+・Input.get_xyメソッドの内容を変更。set_event_modeメソッドのでの切り替えに変更、パフォーマンスアップ
+・サンプル0008を追加したInputの機能に準拠

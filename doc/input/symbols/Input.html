@@ -308,6 +308,24 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.click_event_name">click_event_name</a></b>()
+								</div>
+								<div class="description">クリックイベント名を取得<br></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.end_event_name">end_event_name</a></b>()
+								</div>
+								<div class="description">終了イベント名を取得<br></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.get_xy_mouse">get_xy_mouse</a></b>(ev, ev)
 								</div>
 								<div class="description">現在のマウスポインタの位置を取得する<br>mousestart, mousemoveなどのイベントハンドリング時に使用する<br>$areaで示したブロック(jQueryオブジェクト)の左上を[0,0]とする</div>
@@ -338,6 +356,33 @@ ul.inheritsList
 								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.is_windows8">is_windows8</a></b>()
 								</div>
 								<div class="description">User Agent から、使用しているOSがWindows 8かどうか判別する<br></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.move_event_name">move_event_name</a></b>()
+								</div>
+								<div class="description">移動中イベント名を取得<br></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.set_event_mode">set_event_mode</a></b>(mode)
+								</div>
+								<div class="description">イベントモードを切り替える<br>タッチ対応かマウス対応可を選択<br>初期値は”mouse”<br></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.start_event_name">start_event_name</a></b>()
+								</div>
+								<div class="description">開始イベント名を取得<br></div>
 							</td>
 						</tr>
 					
@@ -466,6 +511,70 @@ ul.inheritsList
 							<dt class="heading">Returns:</dt>
 							
 								<dd>タッチデバイスの時はtrue、それ以外はfalse</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".click_event_name"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">Input.</span><b>click_event_name</b>()
+					
+					</div>
+					<div class="description">
+						クリックイベント名を取得<br>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>mouseのときは"click"、touchのときは"touchstart"</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".end_event_name"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">Input.</span><b>end_event_name</b>()
+					
+					</div>
+					<div class="description">
+						終了イベント名を取得<br>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>mouseのときは"mouseend"、touchのときは"touchend"</dd>
 							
 							</dl>
 						
@@ -651,6 +760,113 @@ ul.inheritsList
 						
 						
 
+					<hr />
+				
+					<a name=".move_event_name"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">Input.</span><b>move_event_name</b>()
+					
+					</div>
+					<div class="description">
+						移動中イベント名を取得<br>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>mouseのときは"mousemove"、touchのときは"touchmove"</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".set_event_mode"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">Input.</span><b>set_event_mode</b>(mode)
+					
+					</div>
+					<div class="description">
+						イベントモードを切り替える<br>タッチ対応かマウス対応可を選択<br>初期値は”mouse”<br>
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>mode</b>
+									
+								</dt>
+								<dd>イベントモード<br>"touch"か"mouse”のみ指定可能<br>その他はfalseが返る</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>mode引数が正しければtrue、正しくなければfalse</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".start_event_name"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">Input.</span><b>start_event_name</b>()
+					
+					</div>
+					<div class="description">
+						開始イベント名を取得<br>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>mouseのときは"mousestart"、touchのときは"touchstart"</dd>
+							
+							</dl>
+						
+						
+						
+
 					
 				
 			
@@ -665,7 +881,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue May 28 2013 02:18:21 GMT+0900 (JST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Jul 01 2013 01:32:31 GMT+0900 (JST)
 		</div>
 	</body>
 </html>
