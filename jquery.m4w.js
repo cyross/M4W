@@ -63,7 +63,7 @@
 
     var assets = {}
 
-    for(var i=0; i<o.assets.length; i++){
+    for(var i=0, len=o.assets.length; i<len; i++){
       var asset = o.assets[i]
       assets[asset.id] = asset;
     }
@@ -76,7 +76,7 @@
     $.when.apply(this, exec_assets).then(function(){
       var loaded_assets = {
       };
-      for(var i=0; i<arguments.length; i++){
+      for(var i=0, alen=arguments.length; i<alen; i++){
         var asset = arguments[i];
         if (!(asset.type in loaded_assets)){ loaded_assets[asset.type] = {}; }
         loaded_assets[asset.type][asset.id] = asset.value;
@@ -106,7 +106,7 @@
     var ctx = this.context;
     var ia = this.sprites;
     ctx.clearRect(0, 0, this.width, this.height);
-    for(var i=0; i<ia.length; i++){
+    for(var i=0, ialen=ia.length; i<ialen; i++){
       var s = ia[i];
       if(!('render' in s)){ continue; }
       s.render(ctx);
@@ -123,7 +123,7 @@
   ScreenRenderer.no_clear_render = function(){
     var ctx = this.context;
     var ia = this.sprites;
-    for(var i=0; i<ia.length; i++){
+    for(var i=0, ialen=ia.length; i<ialen; i++){
       var s = ia[i];
       if(!('render' in s)){ continue; }
       s.render(ctx);
@@ -482,25 +482,27 @@
    * ゲームループ内部ロジック
    */
   window.m4w._game_loop = function(){
+    var _m4w = window.m4w;
     // メインロジック実行
-    window.m4w.main_logic();
+    _m4w.main_logic();
     // 外部から停止リクエストが来たときは終了
-    if(window.m4w.is_stop){
-      window.cancelAnimFrame(window.m4w.rendering_id);
-      window.m4w.is_stop = false;
+    if(_m4w.is_stop){
+      window.cancelAnimFrame(_m4w.rendering_id);
+      _m4w.is_stop = false;
       return;
     }
     // 画面描画
-    window.m4w.screen.render();
+    _m4w.screen.render();
     // 次のループ実行を設定
-    window.m4w.rendering_id = window.requestAnimFrame(window.m4w._game_loop.bind(window.m4w));
+    _m4w.rendering_id = window.requestAnimFrame(_m4w._game_loop.bind(_m4w));
   };
 
   /**
    * ゲームループ開始
    */
   window.m4w.main_loop = function(){
-    window.m4w.rendering_id = window.requestAnimFrame(window.m4w._game_loop.bind(window.m4w));
+    var _m4w = window.m4w;
+    _m4w.rendering_id = window.requestAnimFrame(_m4w._game_loop.bind(_m4w));
   };
 
   /**

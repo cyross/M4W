@@ -62,6 +62,7 @@ function createPhysicsBody(world, body_def, fixture_def){
 }
 
 $(document).ready(function(){
+  var _m4w = window.m4w;
   // アセットロード終了時の処理
   var on_ready = function(assets){
     // アニメーション関係
@@ -136,6 +137,9 @@ $(document).ready(function(){
     // 剛体を生成
     createPhysicsBody(world, body_def, fixture_def);
 
+    // スプライトを設定
+    var _sprite = sprite;
+
     // メインロジック
     var main_logic = function(){
       world.Step(physics_time, velocity_iterations, position_iterations);
@@ -155,13 +159,13 @@ $(document).ready(function(){
       if(cnt == wait){
         pattern = (pattern + 1) % 4;
         // パターンの変更
-        window.m4w.screen.sprites[0].sy = pattern * 64;
+        _sprite.sy = pattern * 64;
         cnt = 0;
       }
     };
 
-    window.m4w.screen.sprites[0] = sprite; // わざとインデックスを付けて登録
-    window.m4w.main_logic = main_logic;
+    _m4w.screen.sprites[0] = sprite; // わざとインデックスを付けて登録
+    _m4w.main_logic = main_logic;
   };
 
   // M4Wの初期化
@@ -177,5 +181,5 @@ $(document).ready(function(){
   });
 
   // メインループの開始
-  window.m4w.main_loop();
+  _m4w.main_loop();
 });
