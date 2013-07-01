@@ -27,6 +27,7 @@
    * また、以下のプロパティが利用可能
    * <ul>
    * <li>vars(入力デバイス関連情報共有オブジェクト<br>初期は空のオブジェクト)</li>
+   * <li>key_states(キーの押下状態)</li>
    * </ul>
    * @example if((window).m4w.Input.can_touch()){ ... }
   */
@@ -39,7 +40,9 @@
     move_events: {touch: "touchmove", mouse: "mousemove"},
     end_events: {touch: "touchend", mouse: "mouseup"},
     click_events: {touch: "touchstart", mouse: "click"},
-    event_mode: "mouse"
+    event_mode: "mouse",
+    pressed_keys: [],
+    key_states: []
   };
 
   /**
@@ -181,6 +184,74 @@
    * @property event_modeによって、get_xy_touch、get_xy_mouseを切り替える
    */
   Input.get_xy = Input.get_xy_mouse;
+
+  /**
+   * キーの押下状態を初期化する<br>
+   * キーの押下状態の監視対象を設定する<br>
+   * キーは、キーコードの配列を指定する<br>
+   * 押下対象になったキーは、引数keycodesで指定した順番に、状態を参照できる<br>
+   * keycodesは整数(キーコード)の配列だが、複数のキーでひとつの状態とするときは、キーコードの配列をひとつの要素で指定する<br>
+   * 例1:Input.init_key_status([56,54,52,50]); <- 8,6,4,2のキーに対応<br>
+   * 例2:Input.init_key_status([[56,104],[54,102],[52,100],[50,98]]); <- テンキーの8,6,4,2にも同時に対応<br>
+   * 例3:Input.init_key_status([[56,104],[54,102],[52,100],[50,98],90,88]); <- 更に、Z,Xキーにも対応
+   * 押下状態は、Input.key_states配列で参照する<br>
+   * キーが押されていたら、その要素がtrue、離れていたらfalseを返す<br>
+   * @param keycodes 監視対象にするキーコードの配列
+   */
+  Input.init_key_status = function(keycodes){
+    Input.pressed_keys = [];
+    Input.key_states = [];
+    for(var i=0, klen=keycodes.length; i<klen; i++){
+      var codes = keycodes[i];
+      if(isFinite(codes)){
+        Input.pressed_keys.push([codes]);
+      }
+      else{
+        Input.pressed_keys.push(codes);
+      }
+      Input.key_states.push(false);
+    }
+  }
+
+  /**
+   * キーの押下状態監視を開始する<br>
+   */
+  Input.start_key_monitoring = function(){
+    $(document).on("keydown", function(ev){
+      var keys = Input.pressed_keys;
+      for(var i = 0, klen = keys.length; i < klen; i++){
+        var kkeys = keys[i];
+        for(var j = 0, kklen = kkeys.length; j < kklen; j++){
+          if(ev.keyCode == kkeys[j]){
+            Input.key_states[i] = true;
+            ev.preventDefault();
+            return;
+          }
+        }
+      }
+    });
+    $(document).on("keyup", function(ev){
+      var keys = Input.pressed_keys;
+      for(var i = 0, klen = keys.length; i < klen; i++){
+        var kkeys = keys[i];
+        for(var j = 0, kklen = kkeys.length; j < kklen; j++){
+          if(ev.keyCode == kkeys[j]){
+            Input.key_states[i] = false;
+            ev.preventDefault();
+            return;
+          }
+        }
+      }
+    });
+  }
+
+  /**
+   * キーの押下状態監視を停止する<br>
+   */
+  Input.stop_key_monitoring = function(){
+    $(document).off("keydown");
+    $(document).off("keyup");
+  }
 
   window.m4w = $.extend({Input: Input}, window.m4w);
 })(jQuery);

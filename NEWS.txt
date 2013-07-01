@@ -114,3 +114,9 @@
 ・Input.set_event_mode, Input.click_event_name, Input.start_event_name, Input.move_event_name, Input.end_event_nameメソッドを追加
 ・Input.get_xyメソッドの内容を変更。set_event_modeメソッドのでの切り替えに変更、パフォーマンスアップ
 ・サンプル0008を追加したInputの機能に準拠
+
+2013/07/02
+・Input.init_key_status, Input.start_key_monitoring, Input.stop_key_monitoring メソッドを追加
+・Input.key_states プロパティを追加
+・サンプル0009を追加
+  キーボードの押下状態の表示サンプル

@@ -173,6 +173,12 @@ http://kudox.jp/html-css/html5-canvas-animation
 
 http://unolabo.boo.jp/archives/2011/07/21-%E3%80%90iphoneandroid%E3%80%91%E3%82%BF%E3%83%83%E3%83%81%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%8B%E3%81%A9%E3%81%86%E3%81%8B%E5%88%A4%E5%AE%9A%E3%81%99%E3%82%8B.html
 
+Inputのキー押下状態監視は、West in the Far Eastさんの以下のブログ記事を参考にしました。
+この場を借りて御礼申し上げます。
+
+018.Javascriptでキーの同時押しを制御する
+https://sites.google.com/site/westinthefareast/home/game-parts/laser
+
 サンプルに使用している画像の一部は、以下のボタン作成サイトを利用しています。
 
 http://box.aflat.com/buttonmaker/

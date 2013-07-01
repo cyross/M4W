@@ -210,7 +210,7 @@ ul.inheritsList
 				
 				
 			
-				各種クラスの外部アクセス用名前空間<br>以下の関数が利用可能<ul><li>can_touch</li><li>is_windows8</li><li>get_xy_mouse</li><li>get_xy_touch</li><li>get_xy_multitouch</li><li>get_xy</li></ul>また、以下のプロパティが利用可能<ul><li>vars(入力デバイス関連情報共有オブジェクト<br>初期は空のオブジェクト)</li></ul>
+				各種クラスの外部アクセス用名前空間<br>以下の関数が利用可能<ul><li>can_touch</li><li>is_windows8</li><li>get_xy_mouse</li><li>get_xy_touch</li><li>get_xy_multitouch</li><li>get_xy</li></ul>また、以下のプロパティが利用可能<ul><li>vars(入力デバイス関連情報共有オブジェクト<br>初期は空のオブジェクト)</li><li>key_states(キーの押下状態)</li></ul>
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/jquery.m4w.input.js.html">jquery.m4w.input.js</a>.
@@ -353,6 +353,15 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.init_key_status">init_key_status</a></b>(keycodes)
+								</div>
+								<div class="description">キーの押下状態を初期化する<br>キーの押下状態の監視対象を設定する<br>キーは、キーコードの配列を指定する<br>押下対象になったキーは、引数keycodesで指定した順番に、状態を参照できる<br>keycodesは整数(キーコード)の配列だが、複数のキーでひとつの状態とするときは、キーコードの配列をひとつの要素で指定する<br>例1:Input.init_key_status([56,54,52,50]); <- 8,6,4,2のキーに対応<br>例2:Input.init_key_status([[56,104],[54,102],[52,100],[50,98]]); <- テンキーの8,6,4,2にも同時に対応<br>例3:Input.init_key_status([[56,104],[54,102],[52,100],[50,98],90,88]); <- 更に、Z,Xキーにも対応押下状態は、Input.key_states配列で参照する<br>キーが押されていたら、その要素がtrue、離れていたらfalseを返す<br></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.is_windows8">is_windows8</a></b>()
 								</div>
 								<div class="description">User Agent から、使用しているOSがWindows 8かどうか判別する<br></div>
@@ -383,6 +392,24 @@ ul.inheritsList
 								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.start_event_name">start_event_name</a></b>()
 								</div>
 								<div class="description">開始イベント名を取得<br></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.start_key_monitoring">start_key_monitoring</a></b>()
+								</div>
+								<div class="description">キーの押下状態監視を開始する<br></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">Input.<b><a href="../symbols/Input.html#.stop_key_monitoring">stop_key_monitoring</a></b>()
+								</div>
+								<div class="description">キーの押下状態監視を停止する<br></div>
 							</td>
 						</tr>
 					
@@ -730,6 +757,42 @@ ul.inheritsList
 
 					<hr />
 				
+					<a name=".init_key_status"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">Input.</span><b>init_key_status</b>(keycodes)
+					
+					</div>
+					<div class="description">
+						キーの押下状態を初期化する<br>キーの押下状態の監視対象を設定する<br>キーは、キーコードの配列を指定する<br>押下対象になったキーは、引数keycodesで指定した順番に、状態を参照できる<br>keycodesは整数(キーコード)の配列だが、複数のキーでひとつの状態とするときは、キーコードの配列をひとつの要素で指定する<br>例1:Input.init_key_status([56,54,52,50]); <- 8,6,4,2のキーに対応<br>例2:Input.init_key_status([[56,104],[54,102],[52,100],[50,98]]); <- テンキーの8,6,4,2にも同時に対応<br>例3:Input.init_key_status([[56,104],[54,102],[52,100],[50,98],90,88]); <- 更に、Z,Xキーにも対応押下状態は、Input.key_states配列で参照する<br>キーが押されていたら、その要素がtrue、離れていたらfalseを返す<br>
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>keycodes</b>
+									
+								</dt>
+								<dd>監視対象にするキーコードの配列</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name=".is_windows8"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -867,6 +930,56 @@ ul.inheritsList
 						
 						
 
+					<hr />
+				
+					<a name=".start_key_monitoring"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">Input.</span><b>start_key_monitoring</b>()
+					
+					</div>
+					<div class="description">
+						キーの押下状態監視を開始する<br>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".stop_key_monitoring"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">Input.</span><b>stop_key_monitoring</b>()
+					
+					</div>
+					<div class="description">
+						キーの押下状態監視を停止する<br>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
 					
 				
 			
@@ -881,7 +994,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Jul 01 2013 01:32:31 GMT+0900 (JST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue Jul 02 2013 00:26:34 GMT+0900 (JST)
 		</div>
 	</body>
 </html>

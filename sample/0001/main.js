@@ -1,17 +1,22 @@
 $(document).ready(function(){
+  var _m4w = window.m4w;
   // メインロジック
   var main_logic = function(){
-    window.m4w.screen.sprites[1].move({dx:1,dy:0});
+    _m4w.screen.sprites[1].move({dx:1,dy:0});
   };
+
+  var can_touch = Input.can_touch() && !(Input.is_windows8());
+
+  if(can_touch){ Input.set_event_mode("touch"); }
 
   // アセットロード終了時の処理
   // ・メインロジックの登録
   // ・ボタン押下次の処理の追加
   var on_ready = function(assets){
-    window.m4w.screen.sprites.push(assets.sprite.s01);
-    window.m4w.main_logic = main_logic;
-    $("#button1").on("click", function(e){
-      window.m4w.screen.sprites[1].move({dx:0,dy:4});
+    _m4w.screen.sprites.push(assets.sprite.s01);
+    _m4w.main_logic = main_logic;
+    $("#button1").on(Input.click_event_name(), function(e){
+      _m4w.screen.sprites[1].move({dx:0,dy:4});
       e.preventDefault();
     });
   }
@@ -39,8 +44,8 @@ $(document).ready(function(){
   });
   
   // メインループの開始
-  window.m4w.main_loop();
+  _m4w.main_loop();
   
   // 10秒後にメインループを終了するように設定
-  window.setTimeout(window.m4w.stop_main_loop, 10000);
+  window.setTimeout(_m4w.stop_main_loop, 10000);
 });
