@@ -2,7 +2,7 @@
 
 version 0.0.1
 
-2013.05.20 Cyross Makoto
+2013.07.02 Cyross Makoto
 
 # はじめに
 
