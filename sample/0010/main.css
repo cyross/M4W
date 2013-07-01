@@ -1,0 +1,18 @@
+div#game {
+  background: #008000;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+  width: 640px;
+  height: 480px;
+}
+div#message {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 2000;
+}
+p {
+  color: white;
+}

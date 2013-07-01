@@ -135,7 +135,7 @@
    * 画面の描画を行わない
    */
   ScreenRenderer.no_render = function(){
-  	return this;
+    return this;
   };
 
   /**
@@ -176,6 +176,7 @@
    * @param [options.content_height] 描画領域の高さ<br>単位はピクセル<br>指定したときは、heightで指定したはんいまで拡大して表示される<br>省略時はheightと同じ値
    * @param [options.renderer] 描画する際の処理関数<br>省略時はRenderer.default_render
    * @param [options.z] ブラウザ上の前後位置を指定する<br>省略時は0
+   * @param [options.get_context] レイヤーのコンテキストを作成するかどうかのフラグ<br>WebGLを使う時など、コンテキストを作成する必要がないときはfalseを渡す<br>falseを渡したときは、画面のレンダラが自動的にScreenRenderer.no_renderメソッドが指定される<br>(trueの時はScreenRenderer.default_render)<br>省略時はtrue
    */
   Screen = function(options){
     var o = $.extend({
@@ -187,7 +188,8 @@
       renderer: ScreenRenderer.default_render,
       body: $("body"),
       events: {},
-      z: 0
+      z: 0,
+      get_context: true
     }, options);
 
     var cw = o.width;
@@ -225,9 +227,15 @@
      */
     this.id = o.id;
     /**
-     * @property 画面のデバイスコンテキスト
+     * @property 画面のデバイスコンテキスト(必要なとき)
      */
-    this.context = this.layer[0].getContext("2d");
+    if(o.get_context){
+      this.context = this.layer[0].getContext("2d");
+    }
+    else{
+      this.context = null;
+      o.renderer = ScreenRenderer.no_render;
+    }
     /**
      * @property スプライト配列
      */

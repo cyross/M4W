@@ -166,30 +166,35 @@ version 0.0.1
 本ソフトウェアやサンプルを実装する上で、以下のサイトの情報を参考にさせて頂きました。
 この場を借りて御礼申し上げます。
 
-本ソフトウェアの描画ループ実装は、Kudox.jpさんのブログ記事を参考に致しました。
+本ソフトウェアの描画ループ実装は、Kudox.jpさんのブログ記事を参考にしました。
 
 http://kudox.jp/html-css/html5-canvas-animation
 
-本ソフトウェアのUA判別の一部は、うのらぼ。さんのブログ記事を参考に致しました。
+本ソフトウェアのUA判別の一部は、うのらぼ。さんのブログ記事を参考にしました。
 
 http://unolabo.boo.jp/archives/2011/07/21-%E3%80%90iphoneandroid%E3%80%91%E3%82%BF%E3%83%83%E3%83%81%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%8B%E3%81%A9%E3%81%86%E3%81%8B%E5%88%A4%E5%AE%9A%E3%81%99%E3%82%8B.html
 
-Inputのキー押下状態監視は、West in the Far Eastさんのブログ記事を参考に致しました。
+Inputのキー押下状態監視は、West in the Far Eastさんのブログ記事を参考にしました。
 
 018.Javascriptでキーの同時押しを制御する
 https://sites.google.com/site/westinthefareast/home/game-parts/laser
 
-同じく、押下状態監視の一部処理は、三等兵さんのブログ記事を参考に致しました。
+同じく、押下状態監視の一部処理は、三等兵さんのブログ記事を参考にしました。
 
 通常の数値かどうかはisNaN関数じゃなくてisFinite関数
 http://d.hatena.ne.jp/sandai/20100206/p1
 
-サンプルのキーコードの判別は、Programming Magicさんのブログ記事を参考に致しました。
+サンプルのキーコードの判別は、Programming Magicさんのブログ記事を参考にしました。
 
 各ブラウザでキーコードを取得してみた【JavaScript】
 http://www.programming-magic.com/20080205235859/
 各ブラウザのキーコード表
 http://www.programming-magic.com/file/20080205232140/keycode_table.html
+
+three.jsとを組み合わせたサンプルの実装に、CodeZineの以下の記事を参考にしました。
+
+「three.js」でつくるお手軽3Dマンガ作成ソフト - 前編
+http://codezine.jp/article/detail/7208
 
 サンプルに使用している画像の一部は、以下のボタン作成サイトを利用しています。
 
