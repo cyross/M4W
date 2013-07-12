@@ -310,7 +310,13 @@
    * 画像ファイルを読み込む<br>imgタグを作り、再生ができるときに指定した関数を呼び出す
    * @param options.id 画像に一意につけられるID
    * @param options.src 対象ファイルのURLを配列で指定(マルチブラウザ対応)
-   * @return 画像を読み込んでいるDeferredオブジェクト<br>コールバック関数の引数は、{type: "image", id: options.id, value: 生成したImageオブジェクト. options: 生成時のオプション}で示すオブジェクト
+   * @return 画像を読み込んでいるDeferredオブジェクト<br>コールバック関数の引数は、以下の内容の示すオブジェクト
+   * <ul>
+   *  <li>type: "image"</li>
+   *  <li>id: options.id</li>
+   *  <li>value: 生成したImageオブジェクト</li>
+   *  <li>options: 生成時のオプション</li>
+   * </ul>
    */
   Sprite.load_image = function(options){
     var defer = $.Deferred();
@@ -322,10 +328,16 @@
   };
 
   /**
-   * 音声ファイルを読み込む<br>audioタグを作り、再生ができるときに指定した関数を呼び出す
+   * 画像をロードし、読み込み終了後Spriteオブジェクトを作成する
    * @param options.id スプライトに一意に一位につけられるID<br>内部で生成するImageオブジェクトも同じIDになる
    * @param options.src 対象ファイルのURLを配列で指定(マルチブラウザ対応)
-   * @return スプライトを生成しているDeferredオブジェクト<br>コールバック関数の引数は、{type: "sprite", id: options.id, value: 生成したImageオブジェクト. options: 生成時のオプション}で示すオブジェクト
+   * @return スプライトを生成しているDeferredオブジェクト<br>コールバック関数の引数は、以下のパラメータは以下の内容のオブジェクト
+   * <ul>
+   *  <li>type: "sprite"</li>
+   *  <li>id: options.id</li>
+   *  <li>value: 生成したSpriteオブジェクト</li>
+   *  <li>options: 生成時のオプション</li>
+   * </ul>
    */
   Sprite.load = function(options){
     var defer = $.Deferred();
@@ -424,7 +436,7 @@
   */
 
   /**
-   * @namespace 各種クラスの外部アクセス用名前空間<br>以下のクラスが利用可能
+   * @namespace それぞれのクラスの外部アクセス用名前空間<br>以下のクラスが利用可能
    * <ul>
    * <li>Screen</li>
    * <li>AssetsLoader</li>
@@ -442,7 +454,6 @@
    * <li>vars(データ共有オブジェクト　初期は空のオブジェクト)</li>
    * <li>input_vars(入力デバイス関連情報共有オブジェクト<br>初期は空のオブジェクト)</li>
    * </ul>
-   * @example var dw = new (window).m4w.Drawer({render: function(ctx){ ctx.beginPath(); ... }});
   */
   window.m4w = {
     Screen: Screen,

@@ -160,7 +160,13 @@
    * 音声ファイルを読み込む<br>audioタグを作り、再生ができるときに指定した関数を呼び出す
    * @param options.id スプライトに一意に一位につけられるID<br>内部で生成するImageオブジェクトも同じIDになる
    * @param options.src 対象ファイルのURLを配列で指定(マルチブラウザ対応)
-   * @return スプライトを生成しているDeferredオブジェクト<br>コールバック関数の引数は、{type: "sprite", id: options.id, value: 生成したImageオブジェクト. options: 生成時のオプション}で示すオブジェクト
+   * @return スプライトを生成しているDeferredオブジェクト<br>コールバック関数の引数は以下の内容のオブジェクト
+   * <ul>
+   *  <li>type: "sprite"</li>
+   *  <li>id: options.id</li>
+   *  <li>value: 生成したSpriteExオブジェクト</li>
+   *  <li>options: 生成時のオプション</li>
+   * </ul>
    */
   SpriteEx.load = function(options){
     var defer = $.Deferred();

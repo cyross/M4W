@@ -52,7 +52,13 @@
    * @param options.id audioタグに一位につけられるID
    * @param options.src 音声ファイルのURLを配列で指定(マルチブラウザ対応、ブラウザ内では指定したどれかを再生)
    * @param [options.bgm] BGMとして繰り返し再生可かどうかを指定(true:BGM/false:SE)
-   * @return 音声を再生できる状態に持ち込んでいるDeferredオブジェクト<br>コールバック関数の引数は、{type: "bgm"もしくは"se", id: options.id, value: 生成したSoundオブジェクト. options: 生成時のオプション}で示すオブジェクト
+   * @return 音声を再生できる状態に持ち込んでいるDeferredオブジェクト<br>コールバック関数の引数は以下の内容のオブジェクト
+   * <ul>
+   *  <li>type: "bgm" or "se"</li>
+   *  <li>id: options.id</li>
+   *  <li>value: 生成したSoundオブジェクト</li>
+   *  <li>options: 生成時のオプション</li>
+   * </ul>
    */
   Sound.load = function(options){
     var o = $.extend({
@@ -108,8 +114,8 @@
   Sound.prototype.pause = function(){
     if(!this.is_pause){
       $("audio#"+this.id)[0].pause();
-  	  this.is_pause = true;
-	  }
+      this.is_pause = true;
+    }
   };
 
   /**

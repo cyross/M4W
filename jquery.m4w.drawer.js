@@ -31,8 +31,8 @@
    * 画面の図形の描画を行う
    */
   Drawer.prototype.render = function(ctx){
- 	  this.func(ctx);
-  	return this;
+    this.func(ctx);
+    return this;
   };
 
   window.m4w = $.extend({Drawer: Drawer}, window.m4w);

@@ -123,8 +123,8 @@
     var offset = $area.offset();
     var touches = ev.originalEvent.targetTouches;
     for(var i=0; i<touches.length; i++){
-        var touch = touches[i];
-        result.push([touch.pageX - offset.left, touch.pageY - offset.top]);
+      var touch = touches[i];
+      result.push([touch.pageX - offset.left, touch.pageY - offset.top]);
     }
     return result;
   };

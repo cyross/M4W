@@ -57,7 +57,13 @@
    * @param [options.body] ビデオを埋め込むブロック<br>jQueryオブジェクトを指定<br>省略時はbodyブロック($("body"))
    * @param [options.loop] ビデオを繰り返し再生するかを指定<br>省略時はfalse(繰り返さない)
    * @param [options.autofinish] 再生終了時、自動的にvideoタグを取り除くかを指定<br>省略時はfalse(取り除かない)
-   * @return ビデオを再生できる状態に持ち込んでいるDeferredオブジェクト<br>コールバック関数の引数は、{type: "video", id: options.id, value: 生成したVideoオブジェクト. options: 生成時のオプション}で示すオブジェクト
+   * @return ビデオを再生できる状態に持ち込んでいるDeferredオブジェクト<br>コールバック関数の引数は以下の内容のオブジェクト
+   * <ul>
+   *  <li>type: "video"</li>
+   *  <li>id: options.id</li>
+   *  <li>value: 生成したVideoオブジェクト</li>
+   *  <li>options: 生成時のオプション</li>
+   * </ul>
    */
   Video.load = function(options){
     var o = $.extend({
@@ -104,13 +110,13 @@
 
     if(o.autofinish == true){
       $area[0].addEventListener("ended", (function(){
-          var d = defer;
-          var video_id = o.id;
-          var video = $area[0];
-          return function(){
-            video.finish();
-            d.resolve(video_id);
-          };
+        var d = defer;
+        var video_id = o.id;
+        var video = $area[0];
+        return function(){
+          video.finish();
+          d.resolve(video_id);
+        };
       }).bind(this)());
     }
 
