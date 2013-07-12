@@ -196,6 +196,11 @@ three.jsとを組み合わせたサンプルの実装に、CodeZineの以下の�
 「three.js」でつくるお手軽3Dマンガ作成ソフト - 前編
 http://codezine.jp/article/detail/7208
 
+jquery.m4w.webgl.js・一部サンプルの実装には、以下の２つのページを参考にしました。
+
+http://jsdo.it/qa/79
+http://stackoverflow.com/questions/4590588/opengl-fit-a-quad-to-screen-given-the-value-of-z
+
 サンプルに使用している画像の一部は、以下のボタン作成サイトを利用しています。
 
 http://box.aflat.com/buttonmaker/
