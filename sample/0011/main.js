@@ -10,7 +10,7 @@ $(document).ready(function(){
   $body.m4w({screen_options: _m4w.WebGL.screen_options});
 
   // WebGLオブジェクトの生成
-  var webgl = new _m4w.WebGL($body, _m4w.screen, screen_w, screen_h);
+  var webgl = new _m4w.WebGLOrtho($body, _m4w.screen, screen_w, screen_h);
 
   // アセットロード終了時の処理
   var on_ready = function(assets){

@@ -66,23 +66,36 @@
   };
 
   /**
-   * スプライトを移動させる<br>座標は、ブロックの左上が(0,0)で、値がプラスだと右・下方向、マイナスだと左・上方向となる
-   * @param [options.x] 左端を0とした時の右方向の位置<br>省略時は現在位置
-   * @param [options.y] 上端を0とした時の下方向の位置<br>省略時は現在位置
+   * スプライトを移動させる<br>座標は、ブロックの中心が(0,0)で、値がプラスだと右・上方向、マイナスだと左・下方向となる
+   * @param [options.x] 中心を0とした時の右方向の位置<br>省略時は現在位置
+   * @param [options.y] 中心を0とした時の下方向の位置<br>省略時は現在位置
+   * @param [options.z] 中心を0とした時の手前方向の位置<br>省略時は現在位置
    * @param [options.dx] 右方向をプラスとした時の移動量<br>省略時は0
-   * @param [options.dy] 下方向をプラスとした時の移動量<br>省略時は0
+   * @param [options.dy] 上方向をプラスとした時の移動量<br>省略時は0
+   * @param [options.dz] 手前方向を0とした時の移動量<br>省略時は0
    */
   WebGLSprite.prototype.move = function(options){
-    var o = $.extend({x: this.position.x, y: this.position.y, dx: 0, dy: 0}, options);
+    var o = $.extend({x: this.position.x, y: this.position.y, z: this.position.z, dx: 0, dy: 0, dz: 0}, options);
     this.position.x = o.x + o.dx;
     this.position.y = o.y + o.dy;
+    this.position.z = o.z + o.dz;
   };
 
+  /**
+   * スプライトを回転させる<br>回転の中心は画像の中心<br>x,y,zの単位は度数(ラジアンではない)
+   * @param x x軸方向の回転角度
+   * @param y y軸方向の回転角度
+   * @param z z軸方向の回転角度
+   */
   WebGLSprite.prototype.rotate = function(x, y, z){
     this.tmp_quaternion.setFromEuler(new THREE.Vector3(x, y, z));
     this.quaternion.multiply(this.tmp_quaternion);
   };
 
+  /**
+   * ベクトルを渡してスプライトを回転させる<br>回転の中心は画像の中心<br>x,y,zの単位は度数(ラジアンではない)
+   * @param vector THREE.Vector3クラスのベクトル。x,y,zはx軸・y軸・z軸それぞれの回転角度
+   */
   WebGLSprite.prototype.rotatev = function(vector){
     this.tmp_quaternion.setFromEuler(vector);
     this.quaternion.multiply(this.tmp_quaternion);
