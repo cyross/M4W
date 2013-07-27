@@ -142,3 +142,13 @@
 2013/07/15
 ・jquery.m4w.physics.jsを追加(要Box2dWeb)
 ・サンプル0016を追加
+
+2013/07/16
+・レイヤの生成時、省略時のposition CSSをrelatedからabsoluteに変更
+・キー押下時、フォーカスを失った時の対策を追加
+
+2013/07/18
+・よく使うキーをInput.KEYSのキー名として登録
+
+2013/07/20
+・Input.is_key_pushedメソッドを追加

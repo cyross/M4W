@@ -42,8 +42,44 @@
     click_events: {touch: "touchstart", mouse: "click"},
     event_mode: "mouse",
     pressed_keys: [],
-    key_states: []
+    key_states: [],
+    prev_key_states: []
   };
+
+  // キー名->キーコード変換ハッシュ
+  Input.KEYS = {
+    space: 32,
+    enter: 13,
+    shift: 16,
+    control: 17,
+    alt: 18,
+    insert: 45,
+    delete: 46,
+    left: 37,
+    up: 38,
+    right: 39,
+    down: 40
+  };
+
+  // numキー
+  for(var i=0; i<10; i++){
+    var c0 = "num" + i;
+    Input.KEYS[c0] = [i+48, i+96];
+  }
+
+  // アルファベットのキーコード
+  for(var i=0; i<26; i++){
+    var c0 = i+65;
+    Input.KEYS[String.fromCharCode(c0)] = [c0, i+97];
+  }
+
+  // ファンクションキー
+  for(var i=0; i<12; i++){
+    var c0 = "f"+(i+1);
+    Input.KEYS[c0] = i+112;
+  }
+
+  Input.monitoring = false;
 
   /**
    * User Agent から、タッチデバイスかどうか判別する<br>
@@ -209,6 +245,7 @@
       else{
         Input.pressed_keys.push(codes);
       }
+      Input.prev_key_states.push(false);
       Input.key_states.push(false);
     }
   }
@@ -223,6 +260,7 @@
         var kkeys = keys[i];
         for(var j = 0, kklen = kkeys.length; j < kklen; j++){
           if(ev.keyCode == kkeys[j]){
+            Input.prev_key_states[i] = Input.key_states[i];
             Input.key_states[i] = true;
             ev.preventDefault();
             return;
@@ -236,6 +274,7 @@
         var kkeys = keys[i];
         for(var j = 0, kklen = kkeys.length; j < kklen; j++){
           if(ev.keyCode == kkeys[j]){
+            Input.prev_key_states[i] = Input.key_states[i];
             Input.key_states[i] = false;
             ev.preventDefault();
             return;
@@ -243,6 +282,15 @@
         }
       }
     });
+    $(window).on("blur", function(ev){ // キーを押しているときにフォーカスを失った時の対策
+      var keys = Input.pressed_keys;
+      for(var i = 0, klen = keys.length; i < klen; i++){
+        Input.prev_key_states[i] = false;
+        Input.key_states[i] = false;
+      }
+      ev.preventDefault();
+    });
+    Input.monitoring = true;
   }
 
   /**
@@ -251,7 +299,29 @@
   Input.stop_key_monitoring = function(){
     $(document).off("keydown");
     $(document).off("keyup");
+    Input.monitoring = false;
   }
+
+  /**
+   * キーが押されているかをtrue/falseで返す<br>trueのときは、key_statesの対象の値が強制的にfalseになる
+   */
+  Input.is_key_pushing = function(index){
+    if(!Input.monitoring){ return false; }
+    return Input.key_states[index];
+  };
+
+  /**
+   * キーが押されたかをtrue/falseで返す<br>trueのときは、key_statesの対象の値が強制的にfalseになる
+   */
+
+  Input.is_key_pushed = function(index){
+    if(!Input.monitoring){ return false; }
+    if(Input.key_states[index] && !Input.prev_key_states[index]){
+      Input.key_states[index] = false;
+      return true;
+    }
+    return false;
+  };
 
   window.m4w = $.extend({Input: Input}, window.m4w);
 })(jQuery);

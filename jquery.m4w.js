@@ -182,7 +182,7 @@
     var o = $.extend({
       width: 640,
       height: 480,
-      position: "relative",
+      position: "absolute",
       left: 0,
       top: 0,
       renderer: ScreenRenderer.default_render,
@@ -436,7 +436,7 @@
   */
 
   /**
-   * @namespace それぞれのクラスの外部アクセス用名前空間<br>以下のクラスが利用可能
+   * @namespace それぞれのクラスのアクセス用名前空間<br>以下のクラスが利用可能
    * <ul>
    * <li>Screen</li>
    * <li>AssetsLoader</li>
@@ -547,7 +547,7 @@
     var o = $.extend({
       width: 640,
       height: 480,
-      position: "relative",
+      position: "absolute",
       left: 0,
       top: 0,
       z: 0
