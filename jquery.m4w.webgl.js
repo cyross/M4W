@@ -35,33 +35,31 @@
       alphaTest: 0.5 }, options);
     this.id = o.id;
     this.image = o.value;
-    // テクスチャ
+    /** @property テクスチャ */
     this.texture = new THREE.Texture(this.image, new THREE.UVMapping());
     this.texture.needsUpdate = true;
     this.texture.sourceFile = this.image.src;
 
-    // マテリアル
+    /** @property マテリアル */
     this.material = new THREE.MeshBasicMaterial({map: this.texture, alphaTest: o.alphaTest});
 
-    // ジオメトリ
+    /** @property ジオメトリ */
     this.geometry = new THREE.PlaneGeometry(o.gw, o.gh, 4, 4);
 
-    // メッシュ
+    /** @property メッシュ */
     this.mesh = new THREE.Mesh(this.geometry, this.material);
 
     o.scene.add(this.mesh);
 
-    // 位置情報
+    /** @property 位置情報<br>ブロックの左端から右方向の位置(中心を0とする) */
     this.position = this.mesh.position;
 
-    // クオータニオン
+    /** @property クオータニオン */
     this.quaternion = this.mesh.quaternion;
     this.mesh.useQuaternion = true;
     this.tmp_quaternion = new THREE.Quaternion();
 
-    /** @property ブロックの左端から右方向の位置(中心を0とする) */
     this.position.x = o.x;
-    /** @property ブロックの左端から右方向の位置(中心を0とする) */
     this.position.y = o.y;
   };
 

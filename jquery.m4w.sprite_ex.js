@@ -128,11 +128,11 @@
     this.y = o.y;
     /** @property 描画時の透明度<br>0≦a≦1の間<br>0で完全透明、1で完全不透明 */
     this.a = o.a;
-    /** @property 回転角度<br>単位はラジアン<br>省略時は0.0 */
+    /** @property 回転角度<br>単位はラジアン(実数)<br>省略時は0 */
     this.r = o.r;
-    /** @property 拡大率(x横方向)<br>省略時は1.0 */
+    /** @property 拡大率(x方向、実数)<br>省略時は1 */
     this.scx = o.scx;
-    /** @property 拡大率(y方向)<br>省略時は1.0 */
+    /** @property 拡大率(y方向、実数)<br>省略時は1 */
     this.scy = o.scy;
     /** @property 回転・拡大縮小の中心位置(x方向)<br>省略時は画像の幅の半分 */
     this.tx = o.tx;

@@ -322,7 +322,9 @@
     var defer = $.Deferred();
     var img_id = options.id;
     var img = new Image();
+    /** @ignore */
     img.src = options.src+ "?" + new Date().getTime();
+    /** @ignore */
     img.onload = function(){ defer.resolve({type: "image", id: img_id, value: img, options: options}); };
     return defer.promise();
   };
