@@ -1,0 +1,23 @@
+div#game {
+  background: #000000;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+  width: 480px;
+  height: 480px;
+}
+div#loading {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+  width: 480px;
+  height: 480px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 480px;
+}
+.loading_image {
+  vertical-align: middle;
+}

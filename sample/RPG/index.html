@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Miyako 4 Web RPG sample</title>
+    <link rel="stylesheet" href="main.css" type="text/css" />
+    <!-- jquery-X.X.X.jsをjquery.jsにコピーしてね
+         jquery.m4w.js等を適当な場所からこのファイルが有るディレクトリに
+         コピーしてきて下さい -->
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery.m4w.js"></script>
+    <script type="text/javascript" src="jquery.m4w.input.js"></script>
+    <script type="text/javascript" src="jquery.m4w.sprite_ex.js"></script>
+    <script type="text/javascript" src="jquery.m4w.sound.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+  </head>
+  <body>
+    <div id="game"> </div>
+    <div id="info">
+      <table>
+        <tr><th colspan=3>移動方法</th></tr>
+        <tr><td>&nbsp;</td><td>↑:8キー</td><td>&nbsp;</td></tr>
+        <tr><td>←:4キー</td><td>&nbsp;</td><td>→:6キー</td></tr>
+        <tr><td>&nbsp;</td><td>↓:2キー</td><td>&nbsp;</td></tr>
+        <tr><td colspan=3>&nbsp;</td></tr>
+        <tr><td colspan=3>z: メニューを出す・OK</td></tr>
+        <tr><td colspan=3>x: キャンセル</td></tr>
+        <tr><td colspan=3><input type="button" value="BGMのON/OFF" id="toggle_bgm" /></td></tr>
+        <tr><td colspan=3>(BGMがお城とかの音楽に…)</td></tr>
+      </table>
+    </div>
+  </body>
+</html>

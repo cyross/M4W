@@ -36,10 +36,26 @@
      * @property 入力デバイス関連情報共有オブジェクト<br>初期は空のオブジェクト
      */
     vars: {},
-    start_events: {touch: "touchstart", mouse: "mousedown"},
-    move_events: {touch: "touchmove", mouse: "mousemove"},
-    end_events: {touch: "touchend", mouse: "mouseup"},
-    click_events: {touch: "touchstart", mouse: "click"},
+    events: {
+      start: {touch: "touchstart", mouse: "mousedown"},
+      move: {touch: "touchmove", mouse: "mousemove"},
+      end: {touch: "touchend", mouse: "mouseup"},
+      click: {touch: "touchstart", mouse: "click"},
+      enter: {touch: "mouseenter", mouse: "mouseenter"},
+      leave: {touch: "mouseleave", mouse: "mouseleave"},
+      over: {touch: "mouseover", mouse: "mouseover"},
+      out: {touch: "mouseout", mouse: "mouseout"}
+    },
+    default_events: {
+      start: null,
+      move:  null,
+      end:   null,
+      click: null,
+      enter: null,
+      leave: null,
+      over:  null,
+      out:   null
+    },
     event_mode: "mouse",
     pressed_keys: [],
     key_states: [],
@@ -54,7 +70,7 @@
     control: 17,
     alt: 18,
     insert: 45,
-    delete: 46,
+    "delete": 46,
     left: 37,
     up: 38,
     right: 39,
@@ -109,14 +125,28 @@
   };
 
   /**
+   * User Agent から、タッチデバイスかどうか判別する(Windows 8を除く)<br>
+   * 使用している端末・OSが以下の時、trueとなる
+   * <ul>
+   * <li>イベントにontouchstartが用意されている
+   * <li>iPhone
+   * <li>iPad
+   * <li>iPod Touch
+   * <li>Android端末
+   * <li>Windows Phone
+   * </ul>
+   * @return タッチデバイスの時はtrue、それ以外はfalse
+   */
+  Input.is_touch_device = function(){
+    return window.m4w.is_touch_device();
+  };
+
+  /**
    * User Agent から、使用しているOSがWindows 8かどうか判別する<br>
    * @return Windows 8の時はtrue、それ以外はfalse
    */
   Input.is_windows8 = function(){
-    var user_agent = window.navigator.userAgent.toLowerCase();
-    if(user_agent.indexOf("windows nt 6.2") > -1){ return true; }
-    // その他
-    return false;
+    return window.m4w.is_windows8();
   };
 
   /**
@@ -166,6 +196,21 @@
   };
 
   /**
+   * デバイスによって、自動的にイベントモードを切り替える<br>
+   * タッチ対応かマウス対応に切り替え<br>
+   * 切り替えにInput.is_touch_deviceメソッドを使用<br>
+   * @return なし
+   */
+  Input.set_auto_event_mode = function(){
+    if(Input.is_touch_device()){
+      Input.set_event_mode("touch");
+    }
+    else{
+      Input.set_event_mode("mouse");
+    }
+  }
+
+  /**
    * イベントモードを切り替える<br>
    * タッチ対応かマウス対応可を選択<br>
    * 初期値は”mouse”<br>
@@ -173,7 +218,7 @@
    * @return mode引数が正しければtrue、正しくなければfalse
    */
   Input.set_event_mode = function(mode){
-    if(!mode in Input.start_events){ return false; }
+    if(!mode in Input.events.start){ return false; }
     Input.event_mode = mode;
     if(mode == "touch"){
       Input.get_xy = Input.get_xy_touch;
@@ -189,7 +234,7 @@
    * @return mouseのときは"click"、touchのときは"touchstart"
    */
   Input.click_event_name = function(){
-    return Input.click_events[Input.event_mode];
+    return Input.events.click[Input.event_mode];
   }
 
   /**
@@ -197,7 +242,7 @@
    * @return mouseのときは"mousestart"、touchのときは"touchstart"
    */
   Input.start_event_name = function(){
-    return Input.start_events[Input.event_mode];
+    return Input.events.start[Input.event_mode];
   }
 
   /**
@@ -205,7 +250,7 @@
    * @return mouseのときは"mousemove"、touchのときは"touchmove"
    */
   Input.move_event_name = function(){
-    return Input.move_events[Input.event_mode];
+    return Input.events.move[Input.event_mode];
   }
 
   /**
@@ -213,7 +258,36 @@
    * @return mouseのときは"mouseend"、touchのときは"touchend"
    */
   Input.end_event_name = function(){
-    return Input.end_events[Input.event_mode];
+    return Input.events.end[Input.event_mode];
+  }
+
+  /**
+   * 指定のブロックに、各種イベントを設定する
+   * イベント名は、Input.event_modeの値により、自動的に決定する
+   * @param $area イベントを設定する対象ブロックのjQueryオブジェクト
+   * @param events 各種イベント関数を設定したオブジェクト(省略可)<br>イベントは以下
+   * <ul>
+   * <li>start(mousestart/touchstart)
+   * <li>move(mousemove/touchmove)
+   * <li>end(mouseend/touchend)
+   * <li>click(click/touchstart)
+   * <li>enter(mouseenter)
+   * <li>leave(mouseleave)
+   * <li>over(mouseover)
+   * <li>out(mouseout)
+   * </ul>
+   * @param is_reset イベント設定前に、先に設定されていたイベントをoffにするかどうかを指定するフラグ<br>指定したときはtrue、省略したときはfalse
+   */
+  Input.apply_events = function($area, events, is_reset){
+    var evs = $.extend(Input.default_events, events);
+    var reset = true;
+    if(is_reset === 'undefined'){ reset = true; }
+    for(ev in Input.default_events){
+      var evname = Input.events[ev][Input.event_mode];
+      if(evs[ev] == null){ continue; }
+      if(reset){ $area.off(evname); }
+      $area.on(evname, evs[ev]);
+    }
   }
 
   /**

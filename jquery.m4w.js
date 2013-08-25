@@ -108,6 +108,7 @@
     ctx.clearRect(0, 0, this.width, this.height);
     for(var i=0, ialen=ia.length; i<ialen; i++){
       var s = ia[i];
+      if(s == null){ continue; }
       if(!('render' in s)){ continue; }
       s.render(ctx);
     }
@@ -125,6 +126,7 @@
     var ia = this.sprites;
     for(var i=0, ialen=ia.length; i<ialen; i++){
       var s = ia[i];
+      if(s == null){ continue; }
       if(!('render' in s)){ continue; }
       s.render(ctx);
     }
@@ -496,7 +498,11 @@
     /**
      * @property 入力デバイス関連情報共有オブジェクト<br>初期は空のオブジェクト
      */
-    input_vars: {}
+    input_vars: {},
+    /**
+     * @propert メインループ実行中を示すフラグ。trueの時にメインループに入ると処理を飛ばす
+     */
+    is_main_loop: false
   };
 
   /**
@@ -504,18 +510,22 @@
    */
   window.m4w._game_loop = function(){
     var _m4w = window.m4w;
+    if(_m4w.is_main_loop){ return; }
+    _m4w.is_main_loop = true;
     // メインロジック実行
     _m4w.main_logic();
     // 外部から停止リクエストが来たときは終了
     if(_m4w.is_stop){
       window.cancelAnimFrame(_m4w.rendering_id);
       _m4w.is_stop = false;
+      _m4w.is_main_loop = false;
       return;
     }
     // 画面描画
     _m4w.screen.render();
     // 次のループ実行を設定
     _m4w.rendering_id = window.requestAnimFrame(_m4w._game_loop.bind(_m4w));
+    _m4w.is_main_loop = false;
   };
 
   /**
@@ -567,6 +577,95 @@
     $canvas[0].width = cw;
     $canvas[0].height = ch;
     return $canvas;
+  };
+
+  /**
+   * 引数のUser Agent (複数指定可)から、タッチデバイスかどうか判別する<br>
+   * @param agent 検索したいagentの配列(全て小文字)
+   * @return 指定のagentのどれかに合致した時はtrue、それ以外はfalse
+   */
+  window.m4w._is_device = function(agents){
+    var user_agent = window.navigator.userAgent.toLowerCase();
+
+    for(var i=0; i<agents.length; i++){
+      if(user_agent.indexOf(agents[i]) > -1){ return true; }
+    }
+    // その他
+    return false;
+  };
+
+  /**
+   * User Agent から、タッチデバイスかどうか判別する(Windows 8を除く)<br>
+   * 使用している端末・OSが以下の時、trueとなる
+   * <ul>
+   * <li>イベントにontouchstartが用意されている
+   * <li>iPhone
+   * <li>iPad
+   * <li>iPod Touch
+   * <li>Android端末
+   * <li>Windows Phone
+   * </ul>
+   * @return タッチデバイスの時はtrue、それ以外はfalse
+   */
+  window.m4w.is_touch_device = function(){
+    if(document.ontouchstart !== undefined){ return true; }
+    return window.m4w._is_device(["iphone", "ipad", "ipod", "android", "windowsphone"]);
+  };
+
+  /**
+   * User Agent から、Appleのデバイス(iPhone,iPad,iPod Touch)かどうか判別する<br>
+   * @return Appleのデバイスの時はtrue、それ以外はfalse
+   */
+  window.m4w.is_apple_device = function(){
+    return window.m4w._is_device(["iphone", "ipad", "ipod"]);
+  };
+
+  /**
+   * User Agent から、iPhoneかどうか判別する<br>
+   * @return iPhoneの時はtrue、それ以外はfalse
+   */
+  window.m4w.is_iphone = function(){
+    return window.m4w._is_device(["iphone"]);
+  };
+
+  /**
+   * User Agent から、iPadかどうか判別する<br>
+   * @return iPadの時はtrue、それ以外はfalse
+   */
+  window.m4w.is_ipad = function(){
+    return window.m4w._is_device(["ipad"]);
+  };
+
+  /**
+   * User Agent から、iPod Touchかどうか判別する<br>
+   * @return iPod Touchの時はtrue、それ以外はfalse
+   */
+  window.m4w.is_ipod = function(){
+    return window.m4w._is_device(["ipod"]);
+  };
+
+  /**
+   * User Agent から、Android端末かどうか判別する<br>
+   * @return Android端末の時はtrue、それ以外はfalse
+   */
+  window.m4w.is_android = function(){
+    return window.m4w._is_device(["android"]);
+  };
+
+  /**
+   * User Agent から、使用しているOSがWindowsPhoneかどうか判別する<br>
+   * @return WindowsPhoneの時はtrue、それ以外はfalse
+   */
+  window.m4w.is_windows_phone = function(){
+    return window.m4w._is_device(["windowsphone"]);
+  };
+
+  /**
+   * User Agent から、使用しているOSがWindows 8かどうか判別する<br>
+   * @return Windows 8の時はtrue、それ以外はfalse
+   */
+  window.m4w.is_windows8 = function(){
+    return window.m4w._is_device(["windows nt 6.2"]);
   };
 
   /**
