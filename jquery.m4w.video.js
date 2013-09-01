@@ -40,8 +40,10 @@
   Video = function(id, body){
     this.id = id;
     this.body = body;
+    this.played = false;
     this.is_play = false;
     this.is_pause = false;
+    this.o = {};
   };
 
   /**
@@ -83,7 +85,6 @@
 
     $area.attr("id", o.id);
     $area.attr("preload", "metadata");
-    $area.attr("loop", o.loop);
     $area.attr("width", o.width);
     $area.attr("height", o.height);
     $area.css("position", "absolute");
@@ -107,7 +108,11 @@
       var d = defer;
       var video_id = o.id;
       var body = $area;
-      d.resolve({type: "video", id: video_id, value: new Video(video_id, body), options: o});
+      var obj = new Video(video_id, body);
+
+      obj.o = o;
+
+      d.resolve({type: "video", id: video_id, value: obj, options: o});
     }).bind(this)());
 
     if(o.autofinish == true){
@@ -182,7 +187,14 @@
   Video.prototype.play = function(){
     var v = $("video#"+this.id)[0];
     if(!this.is_pause && !v.ended){ v.pause(); }
-    v.load();
+    if(this.played){
+      v.currentTime = 0;
+    }
+    else{
+      this.played = true;
+      v.loop = this.o.loop;
+      v.load();
+    }
     v.play();
     this.is_play = true;
     this.is_pause = false;

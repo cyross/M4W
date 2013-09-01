@@ -42,8 +42,11 @@
    */
   Sound = function(id){
     this.id = id;
+    this.played = false;
     this.is_play = false;
     this.is_pause = false;
+    this.tag = null;
+    this.o = {};
   };
 
   /**
@@ -70,7 +73,6 @@
 
     $area.attr("id", o.id);
     $area.attr("preload", "auto");
-    if(o.bgm == true){ $area.attr("loop", "true"); }
 
     for(var i=0; i<o.src.length; i++){
       var $src = $("<source />");
@@ -85,13 +87,17 @@
     // Appleデバイスのときは、canplayイベントで待つ必要がある
     var event_name = (window.m4w.is_apple_device() ? "canplay" : "loadedmetadata");
     $area[0].addEventListener(event_name, (function(){
+      var area = $area[0];
       var d = defer;
       var snd_id = o.id;
       var type = (o.bgm==true ? "bgm" : "se");
-      d.resolve({type: type, id: snd_id, value: new Sound(snd_id), options: options});
-    }).bind(this)());
+      var obj = new Sound(snd_id);
 
-    this.tag = $area[0];
+      obj.tag = area;
+      obj.o = o;
+
+      d.resolve({type: type, id: snd_id, value: obj, options: options});
+    }).bind(this)());
 
     return defer.promise();
   };
@@ -100,12 +106,19 @@
    * 音声を再生する<br>最初から再生する(pauseした時も)
    */
   Sound.prototype.play = function(){
-    var v = $("audio#"+this.id);
+    var v = $("audio#"+this.id)[0];
     if(this.is_play){
-      v[0].pause();
+      v.pause();
     }
-    v[0].load();
-    v[0].play();
+    if(this.played){
+      v.currentTime=0;
+    }
+    else{
+      this.played = true;
+      v.loop = this.o.bgm;
+      v.load();
+    }
+    v.play();
     this.is_play = true;
     this.is_pause = false;
   };
