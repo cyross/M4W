@@ -101,11 +101,13 @@
     }
     $area.appendTo(o.body);
 
-    $area[0].addEventListener("loadedmetadata", (function(){
+    // Appleデバイスのときは、canplayイベントで待つ必要がある
+    var event_name = (window.m4w.is_apple_device() ? "canplay" : "loadedmetadata");
+    $area[0].addEventListener(event_name, (function(){
       var d = defer;
       var video_id = o.id;
       var body = $area;
-      return function(){ d.resolve({type: "video", id: video_id, value: new Video(video_id, body), options: o}); };
+      d.resolve({type: "video", id: video_id, value: new Video(video_id, body), options: o});
     }).bind(this)());
 
     if(o.autofinish == true){
@@ -180,6 +182,7 @@
   Video.prototype.play = function(){
     var v = $("video#"+this.id)[0];
     if(!this.is_pause && !v.ended){ v.pause(); }
+    v.load();
     v.play();
     this.is_play = true;
     this.is_pause = false;

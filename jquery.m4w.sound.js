@@ -82,11 +82,13 @@
     }
     $area.appendTo(o.body);
 
-    $area[0].addEventListener("loadedmetadata", (function(){
+    // Appleデバイスのときは、canplayイベントで待つ必要がある
+    var event_name = (window.m4w.is_apple_device() ? "canplay" : "loadedmetadata");
+    $area[0].addEventListener(event_name, (function(){
       var d = defer;
       var snd_id = o.id;
       var type = (o.bgm==true ? "bgm" : "se");
-      return function(){ d.resolve({type: type, id: snd_id, value: new Sound(snd_id), options: options}); };
+      d.resolve({type: type, id: snd_id, value: new Sound(snd_id), options: options});
     }).bind(this)());
 
     this.tag = $area[0];
@@ -102,7 +104,7 @@
     if(this.is_play){
       v[0].pause();
     }
-    v[0].currentTime = 0;
+    v[0].load();
     v[0].play();
     this.is_play = true;
     this.is_pause = false;
